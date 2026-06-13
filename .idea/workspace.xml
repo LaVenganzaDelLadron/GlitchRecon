@@ -1,37 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="" />
+    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/api/routes/finding.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/routes/project.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/routes/report.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/routes/scan.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/finding_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/project_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/report_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scan_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/dependencies.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/scan.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/scan.py" beforeDir="false" afterPath="$PROJECT_DIR$/schemas/scan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/target_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/target_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app.db" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FastAPI main" />
+        <option value="FastAPI test_main" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1,
-  "fromUser": false
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;LaVenganzaDelLadron&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/LaVenganzaDelLadron/GlitchRecon.git&quot;,
+    &quot;accountId&quot;: &quot;ab93fa26-b44b-43ad-a923-c376aede1b1b&quot;
+  }
+}</component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.000000782937239" />
+      <entry key="S60" value="1.0008848731177586" />
+      <entry key="M2" value="1.0310032147530952" />
+      <entry key="M5" value="2.285856664004318" />
+      <entry key="M10" value="14.86393117142354" />
+      <entry key="M15" value="36.80972870809619" />
+      <entry key="M30" value="112.2370601099625" />
+      <entry key="H1" value="234.91148877565726" />
+      <entry key="H2" value="373.3843024845048" />
+      <entry key="H4" value="486.6746720095533" />
+      <entry key="D1" value="619.009350879968" />
+      <entry key="W1" value="646.2997346712166" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="8.351394118423836E-264" />
+      <entry key="S5" value="5.870885247833808E-106" />
+      <entry key="S10" value="2.4230121576159797E-53" />
+      <entry key="S30" value="3.1164352786290923E-18" />
+      <entry key="S60" value="3.0629805781412323E-9" />
+      <entry key="M2" value="1.5911514353283824E-4" />
+      <entry key="M5" value="0.15082111801911877" />
+      <entry key="M10" value="1.7861531714900336" />
+      <entry key="M15" value="4.382719087190075" />
+      <entry key="M30" value="12.30278968649381" />
+      <entry key="H1" value="24.3398247512205" />
+      <entry key="H2" value="37.822377207548804" />
+      <entry key="H4" value="48.89149239136677" />
+      <entry key="D1" value="61.86048567240173" />
+      <entry key="W1" value="64.53864188534294" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.8950250709279725" />
+      <entry key="MS500" value="0.9780634734473393" />
+      <entry key="S2" value="0.9944701686732144" />
+      <entry key="S5" value="0.9977843871238888" />
+      <entry key="S10" value="0.9988915792636801" />
+      <entry key="S30" value="0.999631172383825" />
+      <entry key="S60" value="1.0006998390828834" />
+      <entry key="M2" value="1.0310606875208674" />
+      <entry key="M5" value="2.4345302750387345" />
+      <entry key="M10" value="16.635639231139802" />
+      <entry key="M15" value="41.1668048616028" />
+      <entry key="M30" value="124.5002678972625" />
+      <entry key="H1" value="259.211067314519" />
+      <entry key="H2" value="411.1756081531684" />
+      <entry key="H4" value="535.546293758595" />
+      <entry key="D1" value="680.8656995232674" />
+      <entry key="W1" value="710.837761526931" />
+    </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3F1G3BSfVRBAhIeBYysg5DMdSyI" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "FastAPI.GlitchRecon.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "master",
     "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/argus/Documents/GlitchRecon",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql",
+      "postgresql"
+    ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/core" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="GlitchRecon" type="Python.FastAPI">
+      <option name="file" value="$PROJECT_DIR$/main.py" />
+      <module name="GlitchRecon" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -46,11 +191,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1781234964066</updated>
-      <workItem from="1781234965066" duration="1000" />
+      <workItem from="1781234965066" duration="5285000" />
+      <workItem from="1781253332012" duration="3214000" />
+      <workItem from="1781302693201" duration="6101000" />
+      <workItem from="1781317350410" duration="3209000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/GlitchRecon$GlitchRecon.coverage" NAME="GlitchRecon Coverage Results" MODIFIED="1781319773831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
