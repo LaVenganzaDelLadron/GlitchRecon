@@ -17,3 +17,8 @@ class Scan(Base):
     return_code = Column(Integer)
     error_message = Column(Text)
     approved_at = Column(DateTime)
+    pid = Column(Integer)
+    log_path = Column(Text)
+    exit_path = Column(Text)
+    timed_out = Column(Integer)
+    cancelled_at = Column(DateTime)

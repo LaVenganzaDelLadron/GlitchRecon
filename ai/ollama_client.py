@@ -5,6 +5,6 @@ client = OllamaProvider()
 
 def generate(
     prompt: str,
-    model: str = "qwen3:8b"
+    model: str = "deepseek-r1:8b"
 ):
     return client.generate(prompt, model=model)

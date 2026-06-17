@@ -1,3 +1,6 @@
+import asyncio
+import os
+
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from core.database import engine, Base
@@ -21,6 +24,31 @@ ensure_scan_columns(engine)
 app = FastAPI()
 
 EXEMPT_PATHS = {"/", "/docs", "/openapi.json", "/redoc", "/auth/register", "/auth/login"}
+REQUEST_HARD_TIMEOUT = float(os.getenv("REQUEST_HARD_TIMEOUT", "45"))
+TIMEOUT_EXEMPT_PREFIXES = (
+    "/docs",
+    "/openapi.json",
+    "/redoc",
+)
+
+
+def _is_timeout_exempt(path: str) -> bool:
+    return any(path.startswith(prefix) for prefix in TIMEOUT_EXEMPT_PREFIXES) or path.endswith("/status") or path.endswith("/logs")
+
+
+@app.middleware("http")
+async def request_timeout_middleware(request: Request, call_next):
+    path = request.url.path or ""
+    if _is_timeout_exempt(path):
+        return await call_next(request)
+
+    try:
+        return await asyncio.wait_for(call_next(request), timeout=REQUEST_HARD_TIMEOUT)
+    except asyncio.TimeoutError:
+        return JSONResponse(
+            status_code=504,
+            content={"detail": f"Request exceeded {REQUEST_HARD_TIMEOUT:.0f}s timeout"},
+        )
 
 
 @app.middleware("http")

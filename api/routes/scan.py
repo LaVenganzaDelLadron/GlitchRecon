@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from starlette import status
 
@@ -7,8 +8,10 @@ from schemas.scan import CreateScan, PlanScan
 from services.scan_orchestrator import (
     ScanOrchestrationError,
     approve_scan,
+    cancel_running_scan,
     create_scan_plan,
     get_scan_logs,
+    get_scan_status,
     run_approved_scan,
 )
 from services.scan_service import destroy, index, show, store, update
@@ -88,7 +91,29 @@ async def run_scan(scan_id: int, db: Session = Depends(get_db)):
     except ScanOrchestrationError as exc:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc))
 
-    return {"message": "Scan execution finished", "data": data}
+    return JSONResponse(
+        status_code=status.HTTP_202_ACCEPTED,
+        content={
+            "message": "Scan started in the background",
+            "data": {
+                "scan_id": data.id,
+                "status": data.status,
+                "pid": data.pid,
+                "status_url": f"/scan/{data.id}/status",
+                "logs_url": f"/scan/{data.id}/logs",
+            },
+        },
+    )
+
+
+@router.get("/{scan_id}/status")
+async def read_scan_status(scan_id: int, db: Session = Depends(get_db)):
+    try:
+        data = get_scan_status(db, scan_id)
+    except ScanOrchestrationError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+
+    return {"message": "Scan status fetched successfully", "data": data}
 
 
 @router.get("/{scan_id}/logs")
@@ -99,6 +124,16 @@ async def read_scan_logs(scan_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
 
     return {"message": "Scan logs fetched successfully", "data": data}
+
+
+@router.post("/{scan_id}/cancel")
+async def cancel_scan(scan_id: int, db: Session = Depends(get_db)):
+    try:
+        data = cancel_running_scan(db, scan_id)
+    except ScanOrchestrationError as exc:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc))
+
+    return {"message": "Scan cancelled successfully", "data": data}
 
 
 @router.delete("/{scan_id}")

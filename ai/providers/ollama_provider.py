@@ -2,7 +2,7 @@ from ai.providers.base import LLMProvider
 
 
 class OllamaProvider(LLMProvider):
-    def __init__(self, host: str = "http://localhost:11434", default_model: str = "qwen3:8b"):
+    def __init__(self, host: str = "http://localhost:11434", default_model: str = "deepseek-r1:8b"):
         try:
             from ollama import Client
         except ImportError as exc:

@@ -1,6 +1,5 @@
 import json
 import re
-import subprocess
 from datetime import datetime, timezone
 from typing import Any
 
@@ -11,7 +10,13 @@ from models.finding import Finding
 from models.project import Project
 from models.scan import Scan
 from models.target import Target
-from services.command_runner import CommandExecutionError, CommandResult, run_command
+from services.scan_job_runner import (
+    ScanJobError,
+    cancel_scan,
+    read_scan_logs,
+    refresh_scan_status,
+    start_scan_job,
+)
 from services.tool_registry import ToolRegistryError, build_command, list_tools
 
 
@@ -172,24 +177,11 @@ def _load_scan_command(db: Session, scan: Scan):
     return build_command(plan.get("tool", scan.scanner), target.type, target.value, plan.get("options", []))
 
 
-def _persist_result(db: Session, scan: Scan, result: CommandResult):
-    scan.stdout = result.stdout
-    scan.stderr = result.stderr
-    scan.return_code = result.return_code
-    scan.executed_command = json.dumps(result.argv)
-    scan.started_at = result.started_at
-    scan.finished_at = result.finished_at
-    scan.status = "completed" if result.return_code == 0 else "failed"
-    if result.return_code != 0:
-        scan.error_message = result.stderr or f"Command exited with code {result.return_code}"
+def _create_findings_from_output(db: Session, scan: Scan, output: str):
+    if db.query(Finding).filter(Finding.scan_id == scan.id).first():
+        return
 
-    _create_findings_from_output(db, scan, result)
-    db.commit()
-    db.refresh(scan)
-
-
-def _create_findings_from_output(db: Session, scan: Scan, result: CommandResult):
-    lines = [line.strip() for line in result.stdout.splitlines() if line.strip()]
+    lines = [line.strip() for line in output.splitlines() if line.strip()]
     for line in lines[:25]:
         db.add(
             Finding(
@@ -213,13 +205,9 @@ def run_approved_scan(db: Session, scan_id: int) -> Scan:
         raise ScanOrchestrationError("Scan must be approved before execution")
 
     command_spec = _load_scan_command(db, scan)
-    scan.status = "running"
-    scan.started_at = datetime.now(timezone.utc)
-    db.commit()
-
     try:
-        result = run_command(command_spec)
-    except (CommandExecutionError, ToolRegistryError, subprocess.TimeoutExpired) as exc:
+        start_scan_job(scan, command_spec)
+    except (ScanJobError, ToolRegistryError, RuntimeError) as exc:
         scan.status = "failed"
         scan.error_message = str(exc)
         scan.finished_at = datetime.now(timezone.utc)
@@ -227,20 +215,56 @@ def run_approved_scan(db: Session, scan_id: int) -> Scan:
         db.refresh(scan)
         return scan
 
-    _persist_result(db, scan, result)
+    db.commit()
+    db.refresh(scan)
     return scan
+
+
+def get_scan_status(db: Session, scan_id: int) -> dict[str, Any]:
+    scan = db.query(Scan).filter(Scan.id == scan_id).first()
+    if not scan:
+        raise ScanOrchestrationError("Scan not found")
+
+    previous_status = scan.status
+    refresh_scan_status(scan)
+    if previous_status == "running" and scan.status in {"completed", "failed"}:
+        logs = read_scan_logs(scan)
+        _create_findings_from_output(db, scan, logs.get("output") or "")
+
+    db.commit()
+    db.refresh(scan)
+    return {
+        "scan_id": scan.id,
+        "status": scan.status,
+        "pid": scan.pid,
+        "started_at": scan.started_at,
+        "finished_at": scan.finished_at,
+        "return_code": scan.return_code,
+        "timed_out": bool(scan.timed_out),
+        "error_message": scan.error_message,
+        "status_url": f"/scan/{scan.id}/status",
+        "logs_url": f"/scan/{scan.id}/logs",
+    }
 
 
 def get_scan_logs(db: Session, scan_id: int) -> dict[str, Any]:
     scan = db.query(Scan).filter(Scan.id == scan_id).first()
     if not scan:
         raise ScanOrchestrationError("Scan not found")
-    return {
-        "scan_id": scan.id,
-        "status": scan.status,
-        "command": json.loads(scan.executed_command or "[]"),
-        "stdout": scan.stdout,
-        "stderr": scan.stderr,
-        "return_code": scan.return_code,
-        "error_message": scan.error_message,
-    }
+    refresh_scan_status(scan)
+    db.commit()
+    db.refresh(scan)
+    return read_scan_logs(scan)
+
+
+def cancel_running_scan(db: Session, scan_id: int) -> Scan:
+    scan = db.query(Scan).filter(Scan.id == scan_id).first()
+    if not scan:
+        raise ScanOrchestrationError("Scan not found")
+    try:
+        cancel_scan(scan)
+    except ScanJobError as exc:
+        raise ScanOrchestrationError(str(exc)) from exc
+    db.commit()
+    db.refresh(scan)
+    return scan

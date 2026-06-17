@@ -9,6 +9,11 @@ SCAN_COLUMN_SQL = {
     "return_code": "INTEGER",
     "error_message": "TEXT",
     "approved_at": "DATETIME",
+    "pid": "INTEGER",
+    "log_path": "TEXT",
+    "exit_path": "TEXT",
+    "timed_out": "INTEGER",
+    "cancelled_at": "DATETIME",
 }
 
 
@@ -29,4 +34,3 @@ def ensure_scan_columns(engine):
     with engine.begin() as connection:
         for column_name, column_type in missing_columns:
             connection.execute(text(f"ALTER TABLE scans ADD COLUMN {column_name} {column_type}"))
-
