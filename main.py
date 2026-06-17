@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from core.database import engine, Base
+from core.schema_migrations import ensure_scan_columns
 from api.routes.auth import router as auth_router
 from api.routes.target import router as target_router
 from api.routes.project import router as project_router
@@ -16,6 +17,7 @@ import models.finding
 
 
 Base.metadata.create_all(bind=engine)
+ensure_scan_columns(engine)
 app = FastAPI()
 
 EXEMPT_PATHS = {"/", "/docs", "/openapi.json", "/redoc", "/auth/register", "/auth/login"}

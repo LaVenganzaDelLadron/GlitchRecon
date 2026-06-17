@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text
 from core.database import Base
 
 class Scan(Base):
@@ -10,3 +10,10 @@ class Scan(Base):
     status = Column(String)
     started_at = Column(DateTime)
     finished_at = Column(DateTime)
+    proposed_plan = Column(Text)
+    executed_command = Column(Text)
+    stdout = Column(Text)
+    stderr = Column(Text)
+    return_code = Column(Integer)
+    error_message = Column(Text)
+    approved_at = Column(DateTime)

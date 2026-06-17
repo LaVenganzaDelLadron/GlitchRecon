@@ -1,19 +1,10 @@
-from ollama import Client
+from ai.providers.ollama_provider import OllamaProvider
 
-client = Client(host='http://localhost:11434')
+client = OllamaProvider()
 
 
 def generate(
     prompt: str,
     model: str = "qwen3:8b"
 ):
-    response = client.chat(
-        model=model,
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
-    )
-    return response["message"]["content"]
+    return client.generate(prompt, model=model)

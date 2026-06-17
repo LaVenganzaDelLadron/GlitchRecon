@@ -5,61 +5,50 @@ class Hakrawler:
     def __init__(self, target):
         self.target = target
 
+    def _run(self, *args):
+        return subprocess.run(["hakrawler", *args], input=self.target, capture_output=True, text=True)
+
     def run(self):
         print(f"Running Hakrawler on {self.target}...")
 
     def simple_scan(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler"], capture_output=True, text=True)
-        return result
+        return self._run()
     
     def scan_all(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-d", "3"], capture_output=True, text=True)
-        return result
+        return self._run("-d", "3")
     
     def scan_subs(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-subs"], capture_output=True, text=True)
-        return result
+        return self._run("-subs")
     
     def scan_unique(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-u"], capture_output=True, text=True)
-        return result
+        return self._run("-u")
     
     def scan_json(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-json"], capture_output=True, text=True)
-        return result
+        return self._run("-json")
     
     def scan_threads(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-t", "20"], capture_output=True, text=True)
-        return result
+        return self._run("-t", "20")
 
     def scan_redirects(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-dr"], capture_output=True, text=True)
-        return result
+        return self._run("-dr")
     
     def scan_insecure(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-insecure"], capture_output=True, text=True)
-        return result
+        return self._run("-insecure")
     
     def scan_inside(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-i"], capture_output=True, text=True)
-        return result
+        return self._run("-i")
 
     def scan_timeout(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-timeout", "10"], capture_output=True, text=True)
-        return result
+        return self._run("-timeout", "10")
     
     def scan_size(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-size", "500"], capture_output=True, text=True)
-        return result
+        return self._run("-size", "500")
 
     def scan_source(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-s"], capture_output=True, text=True)
-        return result
+        return self._run("-s")
 
     def scan_url_found(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-w"], capture_output=True, text=True)
-        return result
+        return self._run("-w")
 
     def custom_scan(self):
-        result = subprocess.run(["echo", self.target, "|", "hakrawler", "-d", "3", "-subs", "-u", "-t", "20", "-s", "-w"], capture_output=True, text=True)
-        return result
+        return self._run("-d", "3", "-subs", "-u", "-t", "20", "-s", "-w")
