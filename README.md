@@ -171,9 +171,9 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -d '{
   "owner_id": 1,
-  "name": "davaodelnorte",
+  "name": "test",
   "description": "authorized reconnaissance test",
-  "scope": "davaodelnorte.ph",
+  "scope": "example.com",
   "status": "active"
 }'
 ```
@@ -189,7 +189,7 @@ curl -X 'POST' \
   -d '{
   "project_id": 1,
   "type": "url",
-  "value": "https://davaodelnorte.ph",
+  "value": "https://example.com",
   "notes": "Authorized test target"
 }'
 ```
