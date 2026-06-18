@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../../../components/ui/Button.jsx";
 import ProjectSelector from "./ProjectSelector.jsx";
 
-function ScanPlanForm({ onSubmit, projects, targets }) {
+function ScanPlanForm({ isSubmitting = false, onSubmit, projects, targets }) {
   const [form, setForm] = useState({
     goal: "",
     project_id: "",
@@ -20,7 +20,7 @@ function ScanPlanForm({ onSubmit, projects, targets }) {
     }));
   }
 
-  function submitForm(event) {
+  async function submitForm(event) {
     event.preventDefault();
     onSubmit({
       goal: form.goal,
@@ -28,7 +28,6 @@ function ScanPlanForm({ onSubmit, projects, targets }) {
       provider: form.provider,
       target_id: Number(form.target_id),
     });
-    setForm((current) => ({ ...current, goal: "" }));
   }
 
   return (
@@ -41,7 +40,7 @@ function ScanPlanForm({ onSubmit, projects, targets }) {
       <label className="form-field">
         <span>Target</span>
         <select
-          disabled={!form.project_id}
+          disabled={!form.project_id || isSubmitting}
           required
           value={form.target_id}
           onChange={(event) => updateField("target_id", event.target.value)}
@@ -56,7 +55,11 @@ function ScanPlanForm({ onSubmit, projects, targets }) {
       </label>
       <label className="form-field">
         <span>Provider</span>
-        <select value={form.provider} onChange={(event) => updateField("provider", event.target.value)}>
+        <select
+          disabled={isSubmitting}
+          value={form.provider}
+          onChange={(event) => updateField("provider", event.target.value)}
+        >
           <option value="ollama">ollama</option>
           <option value="openai">openai</option>
           <option value="anthropic">anthropic</option>
@@ -66,14 +69,15 @@ function ScanPlanForm({ onSubmit, projects, targets }) {
         <span>Goal</span>
         <textarea
           placeholder="Perform authorized reconnaissance and summarize findings."
+          disabled={isSubmitting}
           required
           rows="4"
           value={form.goal}
           onChange={(event) => updateField("goal", event.target.value)}
         ></textarea>
       </label>
-      <Button className="full" type="submit" variant="primary">
-        Create scan plan
+      <Button className="full" disabled={isSubmitting} type="submit" variant="primary">
+        {isSubmitting ? "Working..." : "Create scan plan"}
       </Button>
     </form>
   );

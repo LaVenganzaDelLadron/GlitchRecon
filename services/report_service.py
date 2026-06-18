@@ -5,11 +5,7 @@ from models.report import Report
 
 
 def index(db: Session):
-    data = db.query(Report).all()
-
-    if data:
-        return data
-    return {"message": "No reports found"}
+    return db.query(Report).all()
 
 
 def store(db: Session, project_id: int, name: str, format: str, path: str, generated_by: str):

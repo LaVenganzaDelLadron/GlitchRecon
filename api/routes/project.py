@@ -1,8 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from starlette import status
 
-from api.dependencies import get_db
+from api.dependencies import get_current_user, get_db
+from api.responses import bad_request, not_found, success
+from models.users import Users
 from schemas.project import CreateProject
 from services.project_service import destroy, index, show, store, update
 
@@ -16,20 +17,21 @@ router = APIRouter(
 async def list_projects(db: Session = Depends(get_db)):
     data = index(db)
 
-    if isinstance(data, dict):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=data["message"])
-
-    return {"message": "Projects fetched successfully", "data": data}
+    return success("Projects fetched successfully", data)
 
 
 @router.post("/")
-async def create_project(project: CreateProject, db: Session = Depends(get_db)):
-    data = store(db, project.owner_id, project.name, project.description, project.scope, project.status)
+async def create_project(
+    project: CreateProject,
+    db: Session = Depends(get_db),
+    current_user: Users = Depends(get_current_user),
+):
+    data = store(db, current_user.id, project.name, project.description, project.scope, project.status)
 
     if not data:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid owner_id or project data")
+        bad_request("Invalid project data")
 
-    return {"message": "Project created successfully", "data": data}
+    return success("Project created successfully", data)
 
 
 @router.get("/{project_id}")
@@ -37,19 +39,24 @@ async def get_project_detail(project_id: int, db: Session = Depends(get_db)):
     data = show(db, project_id)
 
     if isinstance(data, dict):
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=data["message"])
+        not_found(data["message"])
 
-    return {"message": "Project found successfully", "data": data}
+    return success("Project found successfully", data)
 
 
 @router.put("/{project_id}")
-async def update_project(project_id: int, project: CreateProject, db: Session = Depends(get_db)):
-    data = update(db, project_id, project.owner_id, project.name, project.description, project.scope, project.status)
+async def update_project(
+    project_id: int,
+    project: CreateProject,
+    db: Session = Depends(get_db),
+    current_user: Users = Depends(get_current_user),
+):
+    data = update(db, project_id, current_user.id, project.name, project.description, project.scope, project.status)
 
     if not data:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Project not found or invalid owner_id")
+        not_found("Project not found")
 
-    return {"message": "Project updated successfully", "data": data}
+    return success("Project updated successfully", data)
 
 
 @router.delete("/{project_id}")
@@ -57,6 +64,6 @@ async def delete_project(project_id: int, db: Session = Depends(get_db)):
     data = destroy(db, project_id)
 
     if not data:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Project not found")
+        not_found("Project not found")
 
-    return {"message": "Project deleted successfully", "data": data}
+    return success("Project deleted successfully", data)

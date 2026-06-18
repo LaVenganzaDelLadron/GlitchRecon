@@ -8,11 +8,7 @@ from models.target import Target
 
 
 def index(db: Session):
-    data = db.query(Scan).all()
-
-    if data:
-        return data
-    return {"message": "No scans found"}
+    return db.query(Scan).all()
 
 
 def store(db: Session, project_id: int, target_id: int, scanner: str, status: str, started_at: datetime, finished_at: datetime):
@@ -79,4 +75,3 @@ def destroy(db: Session, scan_id: int):
         db.commit()
 
     return data
-

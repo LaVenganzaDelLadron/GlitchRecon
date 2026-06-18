@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from starlette import status
 
 from api.dependencies import get_db
+from api.responses import bad_request, not_found, success
 from schemas.target import CreateTarget
 from services.target_service import destroy, index, show, store, update
 
@@ -16,13 +16,7 @@ router = APIRouter(
 async def list_targets(db: Session = Depends(get_db)):
     data = index(db)
 
-    if isinstance(data, dict):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=data["message"])
-
-    return {
-        "message": "Successfully fetch target",
-        "data": data,
-    }
+    return success("Successfully fetch target", data)
 
 
 @router.post("/")
@@ -30,12 +24,9 @@ async def create_target(target: CreateTarget, db: Session = Depends(get_db)):
     data = store(db, target.project_id, target.type, target.value, target.notes)
 
     if not data:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Target for this project already exists")
+        bad_request("Target for this project already exists")
 
-    return {
-        "message": "Target created successfully",
-        "data": data,
-    }
+    return success("Target created successfully", data)
 
 
 @router.get("/{target_id}")
@@ -43,25 +34,19 @@ async def get_target_detail(target_id: int, db: Session = Depends(get_db)):
     data = show(db, target_id)
 
     if isinstance(data, dict):
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=data["message"])
+        not_found(data["message"])
 
-    return {
-        "message": "Target found successfully",
-        "data": data,
-    }
+    return success("Target found successfully", data)
 
 
 @router.put("/{target_id}")
 async def update_target(target_id: int, target: CreateTarget, db: Session = Depends(get_db)):
-    data = update(db, target_id, target.type, target.value, target.notes)
+    data = update(db, target_id, target.project_id, target.type, target.value, target.notes)
 
     if not data:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Target not found")
+        not_found("Target not found or invalid project_id")
 
-    return {
-        "message": "Target updated successfully",
-        "data": data,
-    }
+    return success("Target updated successfully", data)
 
 
 @router.delete("/{target_id}")
@@ -69,11 +54,6 @@ async def delete_target(target_id: int, db: Session = Depends(get_db)):
     data = destroy(db, target_id)
 
     if not data:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Target not found")
+        not_found("Target not found")
 
-    return {
-        "message": "Target deleted successfully",
-        "data": data,
-    }
-
-
+    return success("Target deleted successfully", data)

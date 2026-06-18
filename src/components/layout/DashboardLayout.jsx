@@ -5,24 +5,36 @@ function DashboardLayout({
   activeRoute,
   apiStatus,
   children,
-  currentProjectId,
+  onAddProject,
+  onClearSelection,
   onLogout,
-  onProjectChange,
   onRefresh,
+  onSelectProject,
+  onSelectTarget,
   projects,
+  selectedProjectId,
+  selectedTargetId,
+  targets,
   username,
 }) {
   return (
     <div className="dashboard-shell">
-      <SidebarNav activeRoute={activeRoute} />
+      <SidebarNav
+        onAddProject={onAddProject}
+        onClearSelection={onClearSelection}
+        onSelectProject={onSelectProject}
+        onSelectTarget={onSelectTarget}
+        projects={projects}
+        selectedProjectId={selectedProjectId}
+        selectedTargetId={selectedTargetId}
+        targets={targets}
+      />
       <div className="dashboard-main">
         <Topbar
+          activeRoute={activeRoute}
           apiStatus={apiStatus}
-          currentProjectId={currentProjectId}
           onLogout={onLogout}
-          onProjectChange={onProjectChange}
           onRefresh={onRefresh}
-          projects={projects}
           username={username}
         />
         <main className="dashboard-content">{children}</main>

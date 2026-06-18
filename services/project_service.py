@@ -5,11 +5,7 @@ from models.users import Users
 
 
 def index(db: Session):
-    data = db.query(Project).all()
-
-    if data:
-        return data
-    return {"message": "No projects found"}
+    return db.query(Project).all()
 
 
 def store(db: Session, owner_id: int, name: str, description: str, scope: str, status: str):

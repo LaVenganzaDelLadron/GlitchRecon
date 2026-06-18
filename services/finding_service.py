@@ -5,11 +5,7 @@ from models.scan import Scan
 
 
 def index(db: Session):
-    data = db.query(Finding).all()
-
-    if data:
-        return data
-    return {"message": "No findings found"}
+    return db.query(Finding).all()
 
 
 def store(db: Session, scan_id: int, title: str, severity: str, description: str, evidence: str, remediation: str, cve: str, cvss: str):

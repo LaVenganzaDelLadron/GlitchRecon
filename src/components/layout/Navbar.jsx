@@ -1,36 +1,35 @@
 import Button from "../ui/Button.jsx";
 
+const navItems = [
+  { href: "#/overview", label: "Overview" },
+  { href: "#/scans", label: "Scans" },
+  { href: "#/findings", label: "Findings" },
+  { href: "#/reports", label: "Reports" },
+  { href: "#/settings", label: "Settings" },
+];
+
 export function Topbar({
+  activeRoute,
   apiStatus,
-  currentProjectId,
-  onProjectChange,
   onRefresh,
   onLogout,
-  projects = [],
   username = "Operator",
 }) {
   return (
     <header className="dashboard-topbar">
-      <label className="project-select">
-        <span>Project</span>
-        <select value={currentProjectId || ""} onChange={(event) => onProjectChange(event.target.value)}>
-          <option value="">All projects</option>
-          {projects.map((project) => (
-            <option key={project.id} value={project.id}>
-              {project.name}
-            </option>
-          ))}
-        </select>
-      </label>
+      <nav className="topbar-nav" aria-label="Dashboard navigation">
+        {navItems.map((item) => (
+          <a
+            className={activeRoute === item.href.slice(2) ? "active" : ""}
+            href={item.href}
+            key={item.href}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
 
       <div className="topbar-actions">
-        <span className={`api-indicator ${apiStatus?.ok ? "online" : "offline"}`}>
-          {apiStatus?.ok ? "API online" : "API offline"}
-        </span>
-        <span className="user-label">{username}</span>
-        <Button size="sm" variant="ghost" onClick={onRefresh}>
-          Refresh
-        </Button>
         <Button size="sm" variant="ghost" onClick={onLogout}>
           Logout
         </Button>

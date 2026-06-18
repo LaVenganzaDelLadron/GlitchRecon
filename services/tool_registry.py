@@ -149,10 +149,6 @@ TOOL_REGISTRY: dict[str, ToolDefinition] = {
         accepted_target_types=("url",),
         default_timeout_seconds=180,
         output_parser="jsonl",
-        options={
-            "fast": ToolOption(args=("-severity", "low,medium,high,critical")),
-            "cve": ToolOption(args=("-tags", "cve,exposure,misconfig")),
-        },
     ),
     "subfinder": ToolDefinition(
         name="subfinder",

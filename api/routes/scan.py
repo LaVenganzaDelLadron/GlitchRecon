@@ -27,9 +27,6 @@ router = APIRouter(
 async def list_scans(db: Session = Depends(get_db)):
     data = index(db)
 
-    if isinstance(data, dict):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=data["message"])
-
     return {"message": "Scans fetched successfully", "data": data}
 
 
