@@ -201,6 +201,25 @@ TOOL_REGISTRY: dict[str, ToolDefinition] = {
         accepted_target_types=("url",),
         default_timeout_seconds=180,
     ),
+    "curl": ToolDefinition(
+        name="curl",
+        category="http",
+        risk_level="low",
+        command=("curl",),
+        target_arg=None,
+        accepted_target_types=("url",),
+        default_timeout_seconds=60,
+        options={
+            "get": ToolOption(args=("-X", "GET")),
+            "post": ToolOption(args=("-X", "POST")),
+            "put": ToolOption(args=("-X", "PUT")),
+            "delete": ToolOption(args=("-X", "DELETE")),
+            "follow": ToolOption(args=("-L",)),
+            "verbose": ToolOption(args=("-v",)),
+            "silent": ToolOption(args=("-s",)),
+            "json": ToolOption(args=("-H", "Content-Type: application/json")),
+        },
+    ),
 }
 
 
@@ -225,6 +244,13 @@ def list_tools() -> list[dict[str, Any]]:
     ]
 
 
+def _validate_target_value(target_value: str) -> None:
+    if not target_value or not target_value.strip():
+        raise ToolRegistryError("Target value cannot be empty")
+    if any(char in target_value for char in ("\n", "\r", "\x00")):
+        raise ToolRegistryError("Target value contains invalid control characters")
+
+
 def build_command(tool_name: str, target_type: str, target_value: str, options: list[str] | None = None) -> CommandSpec:
     if tool_name not in TOOL_REGISTRY:
         raise ToolRegistryError(f"Unsupported tool: {tool_name}")
@@ -233,6 +259,8 @@ def build_command(tool_name: str, target_type: str, target_value: str, options: 
     if target_type not in tool.accepted_target_types:
         accepted = ", ".join(tool.accepted_target_types)
         raise ToolRegistryError(f"{tool_name} does not accept target type {target_type}; expected one of: {accepted}")
+
+    _validate_target_value(target_value)
 
     argv = list(tool.command)
     stdin = None

@@ -82,6 +82,34 @@ def test_tool_registry_rejects_unknown_tools_and_options():
         build_command("nuclei", "url", "https://example.com", ["delete_everything"])
 
 
+def test_build_command_constructs_curl_argv_in_expected_order():
+    spec = build_command(
+        "curl",
+        "url",
+        "https://example.com/api",
+        ["get", "follow", "silent", "json"],
+    )
+
+    assert spec.argv == [
+        "curl",
+        "-X",
+        "GET",
+        "-L",
+        "-s",
+        "-H",
+        "Content-Type: application/json",
+        "https://example.com/api",
+    ]
+
+
+def test_build_command_rejects_empty_or_control_character_targets():
+    with pytest.raises(ToolRegistryError):
+        build_command("curl", "url", "", ["get"])
+
+    with pytest.raises(ToolRegistryError):
+        build_command("curl", "url", "https://example.com\n", ["get"])
+
+
 def test_command_runner_blocks_shell_metacharacters():
     spec = build_command("nuclei", "url", "https://example.com;rm", ["fast"])
 
