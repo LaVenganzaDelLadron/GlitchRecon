@@ -11,6 +11,8 @@ function ConfirmActionModal({
   onConfirm,
   title,
 }) {
+  const confirmVariant = /delete|cancel/i.test(actionLabel) ? "danger" : "primary";
+
   return (
     <Modal isOpen={isOpen} onClose={onCancel} title={title}>
       <div className="modal-body">
@@ -21,7 +23,7 @@ function ConfirmActionModal({
         <Button disabled={isSubmitting} variant="ghost" onClick={onCancel}>
           Cancel
         </Button>
-        <Button disabled={isSubmitting} variant="primary" onClick={onConfirm}>
+        <Button disabled={isSubmitting} variant={confirmVariant} onClick={onConfirm}>
           {isSubmitting ? "Working..." : actionLabel}
         </Button>
       </footer>
