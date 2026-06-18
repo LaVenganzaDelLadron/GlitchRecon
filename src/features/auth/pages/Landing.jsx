@@ -14,12 +14,12 @@ function Landing() {
         </nav>
 
         <div className="header-actions">
-          <button className="header-button ghost" type="button">
+          <a className="header-button ghost" href="/login">
             Login
-          </button>
-          <button className="header-button" type="button">
+          </a>
+          <a className="header-button" href="/register">
             Register
-          </button>
+          </a>
         </div>
       </header>
 

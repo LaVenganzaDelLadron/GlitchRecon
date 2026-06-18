@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="Implemented the first pass of the safety/validation work">
-      <change beforePath="$PROJECT_DIR$/ai/agents.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/ollama_client.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/prompts.py" beforeDir="false" />
+    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="implement operational dashboard">
+      <change beforePath="$PROJECT_DIR$/src/app/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/routes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/routes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/pages/Landing.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/pages/Landing.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Login.jsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,61 +42,61 @@
 }</component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.000000782937239" />
-      <entry key="S60" value="1.0008848731177586" />
-      <entry key="M2" value="1.0310032147530952" />
-      <entry key="M5" value="2.285856664004318" />
-      <entry key="M10" value="14.86393117142354" />
-      <entry key="M15" value="36.80972870809619" />
-      <entry key="M30" value="112.2370601099625" />
-      <entry key="H1" value="234.91148877565726" />
-      <entry key="H2" value="373.3843024845048" />
-      <entry key="H4" value="486.6746720095533" />
-      <entry key="D1" value="619.009350879968" />
-      <entry key="W1" value="646.2997346712166" />
+      <entry key="MS100" value="2.1800055372729306" />
+      <entry key="MS500" value="3.7791449725919652" />
+      <entry key="S2" value="4.610488352469131" />
+      <entry key="S5" value="4.835410890535851" />
+      <entry key="S10" value="4.91733911827394" />
+      <entry key="S30" value="5.077778117736024" />
+      <entry key="S60" value="5.311797126986994" />
+      <entry key="M2" value="5.581291169176784" />
+      <entry key="M5" value="6.823631697341393" />
+      <entry key="M10" value="18.285256673528547" />
+      <entry key="M15" value="39.15642580511655" />
+      <entry key="M30" value="113.11733005222533" />
+      <entry key="H1" value="235.5601672681107" />
+      <entry key="H2" value="374.9100669388831" />
+      <entry key="H4" value="489.4052136018007" />
+      <entry key="D1" value="623.5273227347213" />
+      <entry key="W1" value="651.2278136696332" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="8.351394118423836E-264" />
-      <entry key="S5" value="5.870885247833808E-106" />
-      <entry key="S10" value="2.4230121576159797E-53" />
-      <entry key="S30" value="3.1164352786290923E-18" />
-      <entry key="S60" value="3.0629805781412323E-9" />
-      <entry key="M2" value="1.5911514353283824E-4" />
-      <entry key="M5" value="0.15082111801911877" />
-      <entry key="M10" value="1.7861531714900336" />
-      <entry key="M15" value="4.382719087190075" />
-      <entry key="M30" value="12.30278968649381" />
-      <entry key="H1" value="24.3398247512205" />
-      <entry key="H2" value="37.822377207548804" />
-      <entry key="H4" value="48.89149239136677" />
-      <entry key="D1" value="61.86048567240173" />
-      <entry key="W1" value="64.53864188534294" />
+      <entry key="S2" value="2.0258261595009043E-278" />
+      <entry key="S5" value="8.368369924245835E-112" />
+      <entry key="S10" value="2.892838790455155E-56" />
+      <entry key="S30" value="3.3060873589052765E-19" />
+      <entry key="S60" value="9.976365447440257E-10" />
+      <entry key="M2" value="9.08083047533619E-5" />
+      <entry key="M5" value="0.12051130160090753" />
+      <entry key="M10" value="1.5966197961967248" />
+      <entry key="M15" value="4.06691887107532" />
+      <entry key="M30" value="11.851260293252752" />
+      <entry key="H1" value="23.888996971600378" />
+      <entry key="H2" value="37.470462686803735" />
+      <entry key="H4" value="48.66350783998266" />
+      <entry key="D1" value="61.81231534473076" />
+      <entry key="W1" value="64.53146008978294" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8950250709279725" />
-      <entry key="MS500" value="0.9780634734473393" />
-      <entry key="S2" value="0.9944701686732144" />
-      <entry key="S5" value="0.9977843871238888" />
-      <entry key="S10" value="0.9988915792636801" />
-      <entry key="S30" value="0.999631172383825" />
-      <entry key="S60" value="1.0006998390828834" />
-      <entry key="M2" value="1.0310606875208674" />
-      <entry key="M5" value="2.4345302750387345" />
-      <entry key="M10" value="16.635639231139802" />
-      <entry key="M15" value="41.1668048616028" />
-      <entry key="M30" value="124.5002678972625" />
-      <entry key="H1" value="259.211067314519" />
-      <entry key="H2" value="411.1756081531684" />
-      <entry key="H4" value="535.546293758595" />
-      <entry key="D1" value="680.8656995232674" />
-      <entry key="W1" value="710.837761526931" />
+      <entry key="MS100" value="2.118144542756845" />
+      <entry key="MS500" value="3.756669564016374" />
+      <entry key="S2" value="4.603508933831629" />
+      <entry key="S5" value="4.832470290265218" />
+      <entry key="S10" value="4.915840718400678" />
+      <entry key="S30" value="5.077233734296509" />
+      <entry key="S60" value="5.311483492284952" />
+      <entry key="M2" value="5.581197089263909" />
+      <entry key="M5" value="6.942376267157984" />
+      <entry key="M10" value="19.8689387589564" />
+      <entry key="M15" value="43.19953252385056" />
+      <entry key="M30" value="124.93045268579435" />
+      <entry key="H1" value="259.40965924118706" />
+      <entry key="H2" value="412.3497450709285" />
+      <entry key="H4" value="538.048942398734" />
+      <entry key="D1" value="685.33550409533" />
+      <entry key="W1" value="715.7586587730138" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -192,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781792624472</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="implement operational dashboard">
+      <option name="closed" value="true" />
+      <created>1781799900225</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1781799900225</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,7 +222,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="remove useless files/ write readme/ hide some important file .gitignore" />
     <MESSAGE value="Implemented the first pass of the safety/validation work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented the first pass of the safety/validation work" />
+    <MESSAGE value="implement operational dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement operational dashboard" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/GlitchRecon$GlitchRecon.coverage" NAME="GlitchRecon Coverage Results" MODIFIED="1781319773831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />

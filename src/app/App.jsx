@@ -1,5 +1,10 @@
+import { routes } from "./routes.jsx";
+
 function App() {
-  return <Landing />;
+  const pathname = window.location.pathname;
+  const RouteComponent = routes[pathname] ?? routes["/"];
+
+  return <RouteComponent />;
 }
 
 export default App;

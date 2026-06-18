@@ -1,4 +1,36 @@
+import { useState } from "react";
+import { api } from "../../../services/api.js";
+
 function Register() {
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+
+  async function submitRegister(event) {
+    event.preventDefault();
+    setError("");
+    setSuccess("");
+    setLoading(true);
+
+    const formData = new FormData(event.currentTarget);
+    const credentials = {
+      username: formData.get("username"),
+      password: formData.get("password"),
+    };
+
+    try {
+      await api.register(credentials);
+      setSuccess("Account created. Redirecting to login...");
+      window.setTimeout(() => {
+        window.location.assign("/login");
+      }, 700);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <main className="auth-page">
       <a className="auth-brand" href="/">
@@ -15,13 +47,14 @@ function Register() {
           </p>
         </div>
 
-        <form className="auth-form">
+        <form className="auth-form" onSubmit={submitRegister}>
           <label className="auth-field">
             <span>Username</span>
             <input
               autoComplete="username"
               name="username"
               placeholder="argus"
+              required
               type="text"
             />
           </label>
@@ -32,12 +65,16 @@ function Register() {
               autoComplete="new-password"
               name="password"
               placeholder="Create a password"
+              required
               type="password"
             />
           </label>
 
-          <button className="auth-submit" type="submit">
-            Register
+          {error ? <p className="auth-alert error">{error}</p> : null}
+          {success ? <p className="auth-alert success">{success}</p> : null}
+
+          <button className="auth-submit" disabled={loading} type="submit">
+            {loading ? "Creating account..." : "Register"}
           </button>
         </form>
 
