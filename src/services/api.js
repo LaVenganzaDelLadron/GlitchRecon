@@ -1,4 +1,7 @@
-export const API_BASE_URL = "http://127.0.0.1:5000";
+const viteEnv = import.meta.env ?? {};
+
+export const API_BASE_URL = viteEnv.VITE_API_BASE_URL ?? "";
+export const BACKEND_ORIGIN = viteEnv.VITE_BACKEND_ORIGIN ?? "http://127.0.0.1:5000";
 
 const TOKEN_KEY = "glitchrecon_token";
 
@@ -48,6 +51,10 @@ export const apiRoutes = {
 };
 
 export function getBackendUrl(path) {
+  return `${BACKEND_ORIGIN}${path}`;
+}
+
+export function getApiUrl(path) {
   return `${API_BASE_URL}${path}`;
 }
 
@@ -76,7 +83,7 @@ export function getAuthTokenFromPayload(payload) {
 
 async function request(path, options = {}) {
   const token = options.token ?? getStoredToken();
-  const response = await fetch(getBackendUrl(path), {
+  const response = await fetch(getApiUrl(path), {
     method: options.method || "GET",
     headers: {
       Accept: "application/json",

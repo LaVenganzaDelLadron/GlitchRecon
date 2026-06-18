@@ -2,6 +2,7 @@ import asyncio
 import os
 
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from core.database import engine, Base
 from core.schema_migrations import ensure_scan_columns
@@ -22,6 +23,23 @@ import models.finding
 Base.metadata.create_all(bind=engine)
 ensure_scan_columns(engine)
 app = FastAPI()
+
+cors_origins = [
+    origin.strip()
+    for origin in os.getenv(
+        "CORS_ORIGINS",
+        "http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174",
+    ).split(",")
+    if origin.strip()
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=cors_origins,
+    allow_credentials=True,
+    allow_methods=["OPTIONS", "GET", "POST", "PUT", "DELETE"],
+    allow_headers=["authorization", "content-type"],
+)
 
 EXEMPT_PATHS = {"/", "/docs", "/openapi.json", "/redoc", "/auth/register", "/auth/login"}
 REQUEST_HARD_TIMEOUT = float(os.getenv("REQUEST_HARD_TIMEOUT", "45"))
@@ -53,6 +71,9 @@ async def request_timeout_middleware(request: Request, call_next):
 
 @app.middleware("http")
 async def auth_middleware(request: Request, call_next):
+    if request.method == "OPTIONS":
+        return await call_next(request)
+
     if request.url.path in EXEMPT_PATHS:
         return await call_next(request)
 

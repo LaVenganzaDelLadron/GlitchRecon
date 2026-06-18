@@ -3,7 +3,7 @@ import Landing from "../features/auth/pages/Landing.jsx";
 import Login from "../features/auth/pages/Login.jsx";
 import Register from "../features/auth/pages/Register.jsx";
 import Dashboard from "../features/dashboard/pages/Dashboard.jsx";
-import { API_BASE_URL, apiRoutes, getBackendUrl } from "../services/api.js";
+import { apiRoutes, getBackendUrl } from "../services/api.js";
 
 function redirectTo(path) {
   return function BackendRedirect() {
@@ -13,7 +13,7 @@ function redirectTo(path) {
 
     return (
       <main className="redirect-page">
-        <p>Opening {API_BASE_URL}{path}</p>
+        <p>Opening {getBackendUrl(path)}</p>
       </main>
     );
   };
