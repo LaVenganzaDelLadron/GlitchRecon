@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import Button from "./Button.jsx";
 
 function Modal({ children, isOpen, onClose, title }) {
@@ -5,7 +6,7 @@ function Modal({ children, isOpen, onClose, title }) {
     return null;
   }
 
-  return (
+  return createPortal(
     <div className="modal-backdrop" role="presentation">
       <section className="modal-panel" role="dialog" aria-modal="true">
         <header className="modal-header">
@@ -16,7 +17,8 @@ function Modal({ children, isOpen, onClose, title }) {
         </header>
         {children}
       </section>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

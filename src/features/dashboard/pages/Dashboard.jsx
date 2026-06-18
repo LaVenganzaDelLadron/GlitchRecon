@@ -21,6 +21,20 @@ const validRoutes = new Set([
   "settings",
 ]);
 
+const projectStatusOptions = [
+  { label: "Active", value: "active" },
+  { label: "Paused", value: "paused" },
+  { label: "Archived", value: "archived" },
+];
+
+const targetTypeOptions = [
+  { label: "URL", value: "url" },
+  { label: "Domain", value: "domain" },
+  { label: "IP address", value: "ip" },
+  { label: "CIDR range", value: "cidr" },
+  { label: "Host", value: "host" },
+];
+
 const resourceConfigs = {
   projects: {
     title: "Projects",
@@ -33,7 +47,7 @@ const resourceConfigs = {
       { name: "name", label: "Name", required: true },
       { name: "description", label: "Description", type: "textarea", required: true },
       { name: "scope", label: "Scope", required: true },
-      { name: "status", label: "Status", required: true },
+      { name: "status", label: "Status", type: "select", required: true, options: projectStatusOptions },
     ],
     create: api.createProject,
     update: api.updateProject,
@@ -56,7 +70,7 @@ const resourceConfigs = {
     emptyMessage: "No targets found.",
     fields: [
       { name: "project_id", label: "Project", type: "select", required: true, options: projectOptions },
-      { name: "type", label: "Type", required: true },
+      { name: "type", label: "Type", type: "select", required: true, options: targetTypeOptions },
       { name: "value", label: "Target", required: true },
       { name: "notes", label: "Notes", type: "textarea", required: true },
     ],
@@ -949,7 +963,7 @@ function FormField({ data, field, isSubmitting, onChange, values }) {
   }
 
   if (field.type === "select") {
-    const options = field.options(data, values);
+    const options = typeof field.options === "function" ? field.options(data, values) : field.options || [];
 
     return (
       <label className="form-field" htmlFor={commonProps.id}>
@@ -1028,12 +1042,18 @@ function ProjectTargetWizard({
             </label>
             <label className="form-field">
               <span>Status</span>
-              <input
+              <select
                 disabled={isSubmitting}
                 required
                 value={project.status}
                 onChange={(event) => updateProject("status", event.target.value)}
-              />
+              >
+                {projectStatusOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
             </label>
             <label className="form-field full">
               <span>Scope</span>
@@ -1070,12 +1090,18 @@ function ProjectTargetWizard({
           <div className="modal-body">
             <label className="form-field">
               <span>Type</span>
-              <input
+              <select
                 disabled={isSubmitting}
                 required
                 value={target.type}
                 onChange={(event) => updateTarget("type", event.target.value)}
-              />
+              >
+                {targetTypeOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
             </label>
             <label className="form-field">
               <span>Target</span>
