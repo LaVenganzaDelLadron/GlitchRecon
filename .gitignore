@@ -2,3 +2,7 @@
 __pycache__/
 *.py[cod]
 .venv/
+app.db
+scan_jobs/
+screenshots/
+uploads/

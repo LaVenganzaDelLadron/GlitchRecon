@@ -7,7 +7,7 @@ class OllamaProvider(LLMProvider):
     def __init__(
         self,
         host: str = "http://localhost:11434",
-        default_model: str = "gemma2:2b",
+        default_model: str = "deepseek-r1:8b",
         timeout_seconds: float | None = None,
     ):
         try:
