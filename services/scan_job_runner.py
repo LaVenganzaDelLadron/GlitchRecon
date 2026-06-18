@@ -67,6 +67,14 @@ def _now():
     return datetime.now(timezone.utc)
 
 
+def _as_utc(value: datetime | None) -> datetime | None:
+    if value is None:
+        return None
+    if value.tzinfo is None:
+        return value.replace(tzinfo=timezone.utc)
+    return value.astimezone(timezone.utc)
+
+
 def _job_paths(scan_id: int) -> dict[str, Path]:
     SCAN_JOBS_DIR.mkdir(parents=True, exist_ok=True)
     return {
@@ -198,7 +206,7 @@ def refresh_scan_status(scan: Scan) -> Scan:
         _set_output_summary(scan)
         return scan
 
-    started_at = scan.started_at
+    started_at = _as_utc(scan.started_at)
     timeout_seconds = _timeout_seconds(scan)
     if started_at and timeout_seconds and (_now() - started_at).total_seconds() > timeout_seconds:
         _kill_process_group(scan.pid)
@@ -247,4 +255,3 @@ def _set_output_summary(scan: Scan):
     logs = read_scan_logs(scan, max_chars=MAX_LOG_CHARS)
     scan.stdout = logs["output"]
     scan.stderr = ""
-

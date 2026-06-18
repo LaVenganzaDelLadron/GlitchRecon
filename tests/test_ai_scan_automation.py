@@ -1,7 +1,9 @@
+import json
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+import httpx
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -24,6 +26,7 @@ from services.scan_orchestrator import (
     approve_scan,
     create_scan_plan,
     get_scan_status,
+    list_child_scans,
     run_approved_scan,
 )
 from services.tool_registry import ToolRegistryError, build_command
@@ -35,6 +38,21 @@ class FakeProvider:
 
     def generate(self, prompt: str, model: str | None = None) -> str:
         return self.response
+
+
+class TimeoutProvider:
+    def generate(self, prompt: str, model: str | None = None) -> str:
+        raise TimeoutError("planner took too long")
+
+
+class HttpxTimeoutProvider:
+    def generate(self, prompt: str, model: str | None = None) -> str:
+        raise httpx.ReadTimeout("ollama read timed out")
+
+
+class BrokenProvider:
+    def generate(self, prompt: str, model: str | None = None) -> str:
+        raise Exception("ollama client exploded")
 
 
 @pytest.fixture()
@@ -71,15 +89,158 @@ def test_command_runner_blocks_shell_metacharacters():
         run_command(spec)
 
 
-def test_ai_planner_rejects_malformed_json(db_session):
-    with pytest.raises(ScanOrchestrationError):
+def test_ai_planner_malformed_json_falls_back_to_safe_plan(db_session):
+    scan = create_scan_plan(
+        db_session,
+        project_id=1,
+        target_id=1,
+        goal="scan the target",
+        provider=FakeProvider("not json"),
+    )
+
+    assert scan.status == "pending_approval"
+    assert scan.scanner == "nuclei"
+    assert '"planner": "fallback"' in scan.proposed_plan
+    assert '"fast"' in scan.proposed_plan
+
+
+def test_ai_planner_timeout_falls_back_to_nuclei_fast(db_session):
+    scan = create_scan_plan(
+        db_session,
+        project_id=1,
+        target_id=1,
+        goal="Run a quick vulnerability scan against this web target",
+        provider=TimeoutProvider(),
+    )
+
+    assert scan.status == "pending_approval"
+    assert scan.scanner == "nuclei"
+    assert '"planner": "fallback"' in scan.proposed_plan
+    assert '"fast"' in scan.proposed_plan
+
+
+def test_ai_planner_httpx_read_timeout_falls_back_to_nuclei_fast(db_session):
+    scan = create_scan_plan(
+        db_session,
+        project_id=1,
+        target_id=1,
+        goal="Run a quick vulnerability scan against this web target",
+        provider=HttpxTimeoutProvider(),
+    )
+
+    assert scan.status == "pending_approval"
+    assert scan.scanner == "nuclei"
+    assert '"planner": "fallback"' in scan.proposed_plan
+    assert "ReadTimeout" in scan.proposed_plan
+
+
+def test_ai_planner_generic_provider_error_falls_back(db_session):
+    scan = create_scan_plan(
+        db_session,
+        project_id=1,
+        target_id=1,
+        goal="Run a quick vulnerability scan against this web target",
+        provider=BrokenProvider(),
+    )
+
+    assert scan.status == "pending_approval"
+    assert scan.scanner == "nuclei"
+    assert '"planner": "fallback"' in scan.proposed_plan
+    assert "ollama client exploded" in scan.proposed_plan
+
+
+def test_unsupported_provider_returns_clean_error(db_session):
+    with pytest.raises(ScanOrchestrationError, match="Unsupported AI provider"):
         create_scan_plan(
             db_session,
             project_id=1,
             target_id=1,
             goal="scan the target",
-            provider=FakeProvider("not json"),
+            provider_name="not-a-provider",
         )
+
+
+def test_ai_unsupported_tool_falls_back(db_session):
+    scan = create_scan_plan(
+        db_session,
+        project_id=1,
+        target_id=1,
+        goal="scan the target",
+        provider=FakeProvider('{"tool":"rm","options":["rf"],"reason":"bad"}'),
+    )
+
+    assert scan.status == "pending_approval"
+    assert scan.scanner == "nuclei"
+    assert '"planner": "fallback"' in scan.proposed_plan
+
+
+def test_comprehensive_recon_url_creates_multi_step_parent_and_children(db_session):
+    scan = create_scan_plan(
+        db_session,
+        project_id=1,
+        target_id=1,
+        goal="Perform comprehensive reconnaissance and map the attack surface",
+        provider=FakeProvider('{"tool":"amass","options":["passive"],"reason":"bad for url"}'),
+    )
+
+    plan = json.loads(scan.proposed_plan)
+    children = list_child_scans(db_session, scan.id)
+    child_tools = [child.scanner for child in children]
+
+    assert scan.scanner == "recon_suite"
+    assert plan["mode"] == "multi_step"
+    assert {"katana", "hakrawler", "gau", "waybackurls", "whatweb", "wappalyzer", "nuclei"}.issubset(child_tools)
+    assert "amass" not in child_tools
+    assert all(child.parent_scan_id == scan.id for child in children)
+
+
+def test_comprehensive_recon_domain_creates_domain_tools(db_session):
+    db_session.add(Target(id=2, project_id=1, type="domain", value="example.com", notes="domain"))
+    db_session.commit()
+
+    scan = create_scan_plan(
+        db_session,
+        project_id=1,
+        target_id=2,
+        goal="Use all recon tools for attack surface mapping",
+        provider=FakeProvider('{"tool":"amass","options":["passive"],"reason":"ok"}'),
+    )
+
+    child_tools = [child.scanner for child in list_child_scans(db_session, scan.id)]
+
+    assert scan.scanner == "recon_suite"
+    assert {"amass", "assetfinder", "findomain", "dnsx", "gau", "waybackurls"}.issubset(child_tools)
+
+
+def test_parent_scan_launches_children_sequentially(monkeypatch, db_session):
+    scan = create_scan_plan(
+        db_session,
+        project_id=1,
+        target_id=1,
+        goal="Perform comprehensive reconnaissance and map the attack surface",
+        provider=FakeProvider('{"tool":"katana","options":["depth_3"],"reason":"ok"}'),
+    )
+    approve_scan(db_session, scan.id)
+
+    launched = []
+
+    def fake_start_scan_job(child, command_spec):
+        launched.append(child.scanner)
+        child.status = "running"
+        child.pid = 12345
+        child.log_path = f"storage/scan_jobs/{child.id}.log"
+        child.exit_path = f"storage/scan_jobs/{child.id}.exit"
+        child.executed_command = json.dumps(command_spec.argv)
+        child.started_at = datetime.now(timezone.utc)
+        return child
+
+    monkeypatch.setattr(scan_orchestrator, "start_scan_job", fake_start_scan_job)
+    running_parent = run_approved_scan(db_session, scan.id)
+    children = list_child_scans(db_session, scan.id)
+
+    assert running_parent.status == "running"
+    assert launched == [children[0].scanner]
+    assert sum(child.status == "running" for child in children) == 1
 
 
 def test_scan_lifecycle_requires_approval_and_starts_background_job(monkeypatch, db_session):
@@ -180,6 +341,21 @@ def test_refresh_status_marks_timeout(monkeypatch):
     assert scan.status == "failed"
     assert scan.timed_out is True
     assert killed["pid"] == 999
+
+
+def test_refresh_status_handles_sqlite_naive_started_at(monkeypatch):
+    monkeypatch.setattr(scan_job_runner, "_pid_alive", lambda pid: True)
+    scan = Scan(
+        id=1,
+        status="running",
+        pid=999,
+        started_at=datetime.now(timezone.utc).replace(tzinfo=None),
+        proposed_plan='{"timeout_seconds": 180}',
+    )
+
+    refresh_scan_status(scan)
+
+    assert scan.status == "running"
 
 
 def test_cancel_running_scan_marks_cancelled(monkeypatch):

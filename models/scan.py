@@ -4,6 +4,7 @@ from core.database import Base
 class Scan(Base):
     __tablename__ = 'scans'
     id = Column(Integer, primary_key=True)
+    parent_scan_id = Column(Integer, ForeignKey('scans.id'))
     project_id = Column(Integer, ForeignKey('projects.id'))
     target_id = Column(Integer, ForeignKey('targets.id'))
     scanner = Column(String)

@@ -12,6 +12,7 @@ from services.scan_orchestrator import (
     create_scan_plan,
     get_scan_logs,
     get_scan_status,
+    list_child_scans,
     run_approved_scan,
 )
 from services.scan_service import destroy, index, show, store, update
@@ -43,7 +44,7 @@ async def create_scan(scan: CreateScan, db: Session = Depends(get_db)):
 
 
 @router.post("/plan")
-async def plan_scan(scan: PlanScan, db: Session = Depends(get_db)):
+def plan_scan(scan: PlanScan, db: Session = Depends(get_db)):
     try:
         data = create_scan_plan(db, scan.project_id, scan.target_id, scan.goal, scan.provider)
     except ScanOrchestrationError as exc:
@@ -101,9 +102,20 @@ async def run_scan(scan_id: int, db: Session = Depends(get_db)):
                 "pid": data.pid,
                 "status_url": f"/scan/{data.id}/status",
                 "logs_url": f"/scan/{data.id}/logs",
+                "children_url": f"/scan/{data.id}/children",
             },
         },
     )
+
+
+@router.get("/{scan_id}/children")
+async def read_scan_children(scan_id: int, db: Session = Depends(get_db)):
+    try:
+        data = list_child_scans(db, scan_id)
+    except ScanOrchestrationError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+
+    return {"message": "Child scans fetched successfully", "data": data}
 
 
 @router.get("/{scan_id}/status")

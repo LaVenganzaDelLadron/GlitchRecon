@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from urllib.parse import urlparse
 from typing import Any
 
 
@@ -47,8 +48,8 @@ TOOL_REGISTRY: dict[str, ToolDefinition] = {
         default_timeout_seconds=600,
         options={
             "passive": ToolOption(args=("-passive",)),
-            "active": ToolOption(args=("-active",), timeout_seconds=900),
-            "brute": ToolOption(args=("-brute",), timeout_seconds=1200),
+            "active": ToolOption(args=("-active",), timeout_seconds=180),
+            "brute": ToolOption(args=("-brute",), timeout_seconds=180),
         },
     ),
     "assetfinder": ToolDefinition(
@@ -61,6 +62,15 @@ TOOL_REGISTRY: dict[str, ToolDefinition] = {
         default_timeout_seconds=180,
         options={"subs_only": ToolOption(args=("--subs-only",))},
     ),
+    "dnsx": ToolDefinition(
+        name="dnsx",
+        category="enumeration",
+        risk_level="low",
+        command=("dnsx",),
+        target_arg="-d",
+        accepted_target_types=("domain", "hostname"),
+        default_timeout_seconds=180,
+    ),
     "ffuf": ToolDefinition(
         name="ffuf",
         category="enumeration",
@@ -68,10 +78,29 @@ TOOL_REGISTRY: dict[str, ToolDefinition] = {
         command=("ffuf",),
         target_arg="-u",
         accepted_target_types=("url",),
-        default_timeout_seconds=600,
+        default_timeout_seconds=180,
         options={
             "common": ToolOption(args=("-w", "/usr/share/wordlists/seclists/Web-Content/common.txt")),
         },
+    ),
+    "findomain": ToolDefinition(
+        name="findomain",
+        category="enumeration",
+        risk_level="low",
+        command=("findomain",),
+        target_arg="-t",
+        accepted_target_types=("domain", "hostname"),
+        default_timeout_seconds=180,
+        options={"resolve": ToolOption(args=("--resolve",))},
+    ),
+    "gau": ToolDefinition(
+        name="gau",
+        category="reconnaissance",
+        risk_level="low",
+        command=("gau",),
+        target_arg=None,
+        accepted_target_types=("url", "domain", "hostname"),
+        default_timeout_seconds=180,
     ),
     "gitleaks": ToolDefinition(
         name="gitleaks",
@@ -80,7 +109,7 @@ TOOL_REGISTRY: dict[str, ToolDefinition] = {
         command=("gitleaks", "detect"),
         target_arg="--source",
         accepted_target_types=("path", "repo"),
-        default_timeout_seconds=300,
+        default_timeout_seconds=180,
         output_parser="json",
     ),
     "hakrawler": ToolDefinition(
@@ -90,7 +119,7 @@ TOOL_REGISTRY: dict[str, ToolDefinition] = {
         command=("hakrawler",),
         target_arg=None,
         accepted_target_types=("url",),
-        default_timeout_seconds=300,
+        default_timeout_seconds=180,
         options={
             "depth_3": ToolOption(args=("-d", "3"), stdin=True),
             "subs": ToolOption(args=("-subs",), stdin=True),
@@ -104,7 +133,7 @@ TOOL_REGISTRY: dict[str, ToolDefinition] = {
         command=("katana",),
         target_arg="-u",
         accepted_target_types=("url",),
-        default_timeout_seconds=300,
+        default_timeout_seconds=180,
         options={
             "depth_3": ToolOption(args=("-d", "3")),
             "include_subdomains": ToolOption(args=("-include-subdomains",)),
@@ -118,12 +147,22 @@ TOOL_REGISTRY: dict[str, ToolDefinition] = {
         command=("nuclei",),
         target_arg="-u",
         accepted_target_types=("url",),
-        default_timeout_seconds=900,
+        default_timeout_seconds=180,
         output_parser="jsonl",
         options={
             "fast": ToolOption(args=("-severity", "low,medium,high,critical")),
             "cve": ToolOption(args=("-tags", "cve,exposure,misconfig")),
         },
+    ),
+    "subfinder": ToolDefinition(
+        name="subfinder",
+        category="enumeration",
+        risk_level="low",
+        command=("subfinder",),
+        target_arg="-d",
+        accepted_target_types=("domain", "hostname"),
+        default_timeout_seconds=180,
+        options={"silent": ToolOption(args=("-silent",))},
     ),
     "trufflehog": ToolDefinition(
         name="trufflehog",
@@ -132,10 +171,44 @@ TOOL_REGISTRY: dict[str, ToolDefinition] = {
         command=("trufflehog", "filesystem"),
         target_arg=None,
         accepted_target_types=("path", "repo"),
-        default_timeout_seconds=300,
+        default_timeout_seconds=180,
         output_parser="json",
     ),
+    "wappalyzer": ToolDefinition(
+        name="wappalyzer",
+        category="analysis",
+        risk_level="low",
+        command=("wappalyzer",),
+        target_arg=None,
+        accepted_target_types=("url",),
+        default_timeout_seconds=180,
+    ),
+    "waybackurls": ToolDefinition(
+        name="waybackurls",
+        category="reconnaissance",
+        risk_level="low",
+        command=("waybackurls",),
+        target_arg=None,
+        accepted_target_types=("url", "domain", "hostname"),
+        default_timeout_seconds=180,
+    ),
+    "whatweb": ToolDefinition(
+        name="whatweb",
+        category="analysis",
+        risk_level="low",
+        command=("whatweb",),
+        target_arg=None,
+        accepted_target_types=("url",),
+        default_timeout_seconds=180,
+    ),
 }
+
+
+def derive_hostname(value: str) -> str:
+    parsed = urlparse(value)
+    if parsed.hostname:
+        return parsed.hostname
+    return value.split("/", 1)[0]
 
 
 def list_tools() -> list[dict[str, Any]]:
@@ -190,4 +263,3 @@ def build_command(tool_name: str, target_type: str, target_value: str, options: 
         parser=tool.output_parser,
         risk_level=tool.risk_level,
     )
-

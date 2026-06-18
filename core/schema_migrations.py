@@ -3,6 +3,7 @@ from sqlalchemy import inspect, text
 
 SCAN_COLUMN_SQL = {
     "proposed_plan": "TEXT",
+    "parent_scan_id": "INTEGER",
     "executed_command": "TEXT",
     "stdout": "TEXT",
     "stderr": "TEXT",
