@@ -146,6 +146,28 @@ Open the API docs:
 http://127.0.0.1:5000/docs
 ```
 
+## Run The React Frontend
+
+Install the JavaScript dependencies:
+
+```bash
+npm install
+```
+
+Start Vite on port 5173:
+
+```bash
+npm run dev
+```
+
+Open the frontend:
+
+```text
+http://127.0.0.1:5173
+```
+
+During development, Vite proxies API requests to FastAPI on port 5000.
+
 ## Example API Flow
 
 Log in:

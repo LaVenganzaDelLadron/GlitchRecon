@@ -1,0 +1,599 @@
+:root {
+  color: #eef5f1;
+  background: #08100e;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(23, 64, 55, 0.28), transparent 420px),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.03) 0,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 96px
+    ),
+    #08100e;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.landing-page {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 20px 0 56px;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 72px;
+}
+
+.brand,
+.site-nav,
+.hero-actions,
+.console-topbar,
+.metric-strip,
+.workflow-section {
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  gap: 10px;
+  color: #ffffff;
+  font-size: 1.02rem;
+  font-weight: 800;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(116, 242, 193, 0.44);
+  border-radius: 8px;
+  background: #10221d;
+  color: #74f2c1;
+}
+
+.site-nav {
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 6px;
+}
+
+.site-nav a {
+  border-radius: 999px;
+  color: #aebbb5;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 9px 14px;
+  transition: all 0.2s ease;
+}
+
+.site-nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+/* Optimized shared action base */
+.header-button,
+.primary-action,
+.secondary-action {
+  display: inline-flex;  /* Ensures perfect centering with icons or text */
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.9rem;     /* Explicit sizing ensures consistency across browsers */
+  white-space: nowrap;
+  outline: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.2s ease;
+}
+
+/* Upgraded Header Button */
+.header-button {
+  border: 1px solid rgba(116, 242, 193, 0.25);
+  background: rgba(116, 242, 193, 0.06);
+  color: #74f2c1;        /* Swapped to your accent color for better brand pop */
+  padding: 0 18px;       /* Slightly wider padding for a more balanced geometric look */
+}
+
+/* Hover: Smooth lift and glow */
+.header-button:hover {
+  background: rgba(116, 242, 193, 0.15);
+  border-color: rgba(116, 242, 193, 0.6);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(116, 242, 193, 0.1);
+}
+
+/* Active: Tactile, satisfying click depth */
+.header-button:active {
+  transform: translateY(0) scale(0.98);
+  background: rgba(116, 242, 193, 0.25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Accessibility: Elegant focus ring for keyboard navigation */
+.header-button:focus-visible {
+  box-shadow: 0 0 0 2px #08100e, 0 0 0 4px #74f2c1;
+}
+
+.hero-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
+  gap: 44px;
+  align-items: center;
+  min-height: calc(100vh - 148px);
+  padding: 54px 0 34px;
+}
+
+.hero-copy {
+  max-width: 720px;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: #74f2c1;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-copy h1,
+.section-heading h2,
+.workflow-section h2 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.hero-copy h1 {
+  max-width: 760px;
+  font-size: clamp(2.55rem, 7vw, 5.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em; /* Tighter letter-spacing feels more premium */
+}
+
+.hero-text {
+  max-width: 650px;
+  margin: 24px 0 0;
+  color: #cbd5d0; /* Brightened text slightly to decrease eye strain and improve readability */
+  font-size: clamp(1rem, 2vw, 1.16rem);
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+
+.hero-actions {
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.primary-action,
+.secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+}
+
+.primary-action {
+  background: #74f2c1;
+  color: #07110e;
+  box-shadow: 0 0 0 rgba(116, 242, 193, 0);
+}
+
+.primary-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(116, 242, 193, 0.3); /* Premium interactive glow */
+  filter: brightness(1.05);
+}
+
+.secondary-action {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #eaf2ef;
+}
+
+.secondary-action:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.03);
+  transform: translateY(-1px);
+}
+
+.scan-console {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(10, 20, 18, 0.9);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+  transition: border-color 0.3s ease;
+}
+
+.scan-console:hover {
+  border-color: rgba(116, 242, 193, 0.25); /* Subtle focus highlight */
+}
+
+.console-topbar {
+  gap: 8px;
+  min-height: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.045);
+  padding: 0 16px;
+}
+
+.console-topbar strong {
+  margin-left: 8px;
+  color: #dbe7e2;
+  font-size: 0.88rem;
+}
+
+.window-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #74f2c1;
+}
+
+.window-dot:nth-child(2) {
+  background: #f5c86a;
+}
+
+.window-dot:nth-child(3) {
+  background: #ee6c5a;
+}
+
+.console-body {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+}
+
+.console-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 14px;
+}
+
+.console-row span {
+  color: #8f9f99;
+}
+
+.console-row strong {
+  color: #ffffff;
+  text-align: right;
+}
+
+.console-row .status-ready {
+  color: #f5c86a;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Subtle, energetic looping pulse indicating live processes */
+.console-row .status-ready::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: livePulse 2s infinite ease-in-out;
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.terminal-output {
+  margin-top: 4px;
+  border: 1px solid rgba(116, 242, 193, 0.14);
+  border-radius: 8px;
+  background: #050907;
+  color: #94f0c8;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  padding: 16px;
+}
+
+.terminal-output p {
+  margin: 0;
+}
+
+.metric-strip {
+  justify-content: space-between;
+  gap: 12px;
+  border-block: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 24px 0;
+}
+
+.metric-strip div {
+  display: grid;
+  gap: 6px;
+}
+
+.metric-strip span,
+.feature-card p,
+.workflow-list {
+  color: #9caaa4;
+}
+
+.metric-strip strong {
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.feature-section,
+.workflow-section {
+  padding-top: 72px;
+}
+
+.section-heading {
+  max-width: 680px;
+}
+
+.section-heading h2,
+.workflow-section h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.feature-card {
+  min-height: 240px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.025)),
+    #0d1714;
+  padding: 22px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Enhances perceived value through interactive elevation and boundary glow */
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(116, 242, 193, 0.3);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035)),
+    #0d1714;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.feature-index {
+  color: #74f2c1;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.feature-card h3 {
+  margin: 42px 0 12px;
+  color: #ffffff;
+  font-size: 1.25rem;
+}
+
+.feature-card p {
+  margin: 0;
+  line-height: 1.62;
+  color: #adbbb5;
+}
+
+.workflow-section {
+  justify-content: space-between;
+  gap: 36px;
+  align-items: flex-start;
+}
+
+.workflow-section > div {
+  max-width: 470px;
+}
+
+.workflow-list {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 520px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: workflow;
+}
+
+.workflow-list li {
+  counter-increment: workflow;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 16px 16px 16px 58px;
+  line-height: 1.5;
+  transition: border-color 0.25s ease;
+}
+
+.workflow-list li:hover {
+  border-color: rgba(116, 242, 193, 0.2);
+}
+
+.workflow-list li::before {
+  content: counter(workflow);
+  position: absolute;
+  left: 16px;
+  top: 14px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: #74f2c1;
+  color: #07110e;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+/* ==========================================================================
+   NEW JERSEY THEME DESIGN EXTENSIONS
+   ========================================================================== */
+
+/* Structural layout layout modeled on high-density urban grids */
+.nj-grid-split {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  margin-top: 64px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  padding-top: 48px;
+}
+
+/* Accent element reflecting the Garden State dynamic border layout */
+.nj-accent-bar {
+  position: relative;
+  border-left: 3px solid #74f2c1;
+  background: linear-gradient(90deg, rgba(116, 242, 193, 0.04), transparent);
+  padding: 24px 28px;
+  border-radius: 0 12px 12px 0;
+}
+
+.nj-accent-bar h4 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.nj-accent-bar p {
+  margin: 0;
+  color: #adbbb5;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Bold, structural tag emphasizing premium micro-copy */
+.nj-editorial-tag {
+  display: inline-flex;
+  align-items: center;
+  background: #10221d;
+  color: #74f2c1;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(116, 242, 193, 0.2);
+  margin-bottom: 16px;
+}
+
+@media (max-width: 860px) {
+  .landing-page {
+    width: min(100% - 24px, 680px);
+    padding-top: 12px;
+  }
+
+  .site-header,
+  .workflow-section,
+  .nj-grid-split {
+    align-items: stretch;
+    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
+  .site-nav {
+    justify-content: space-between;
+    overflow-x: auto;
+  }
+
+  .header-button {
+    width: 100%;
+  }
+
+  .hero-section {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 42px;
+  }
+
+  .metric-strip,
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-strip {
+    display: grid;
+  }
+
+  .feature-card {
+    min-height: 190px;
+  }
+}
+
+@media (max-width: 520px) {
+  .site-nav a {
+    padding-inline: 10px;
+  }
+
+  .hero-copy h1 {
+    font-size: 2.45rem;
+  }
+
+  .console-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .console-row strong {
+    text-align: left;
+    overflow-wrap: anywhere;
+  }
+}

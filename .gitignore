@@ -6,3 +6,9 @@ app.db
 scan_jobs/
 screenshots/
 uploads/
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
