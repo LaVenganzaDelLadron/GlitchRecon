@@ -4,26 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="implement react">
-      <change afterPath="$PROJECT_DIR$/src/components/layout/Sidebar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/shared/Card.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/shared/EmptyState.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/Button.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/Input.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/Loader.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/Modal.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/auth/components/AuthHeader.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/auth/components/LoginForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/auth/pages/Login.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/auth/pages/Register.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/dashboard/components/ProjectCard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/dashboard/pages/Dashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Landing.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/pages/Landing.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Navbar.jsx" afterDir="false" />
+    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="Implemented the first pass of the safety/validation work">
+      <change beforePath="$PROJECT_DIR$/ai/agents.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/ollama_client.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/prompts.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,57 +44,57 @@
       <entry key="MS500" value="1.0" />
       <entry key="S2" value="1.0" />
       <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0000000002927303" />
-      <entry key="S30" value="1.0020824608169583" />
-      <entry key="S60" value="1.119063354877742" />
-      <entry key="M2" value="2.0235322192012624" />
-      <entry key="M5" value="5.481767545512121" />
-      <entry key="M10" value="10.8870211000893" />
-      <entry key="M15" value="17.6240992076028" />
-      <entry key="M30" value="49.5097732135825" />
-      <entry key="H1" value="141.64478497165686" />
-      <entry key="H2" value="298.82166067031665" />
-      <entry key="H4" value="462.5379991188794" />
-      <entry key="D1" value="688.3131255995927" />
-      <entry key="W1" value="739.1114367375139" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.000000782937239" />
+      <entry key="S60" value="1.0008848731177586" />
+      <entry key="M2" value="1.0310032147530952" />
+      <entry key="M5" value="2.285856664004318" />
+      <entry key="M10" value="14.86393117142354" />
+      <entry key="M15" value="36.80972870809619" />
+      <entry key="M30" value="112.2370601099625" />
+      <entry key="H1" value="234.91148877565726" />
+      <entry key="H2" value="373.3843024845048" />
+      <entry key="H4" value="486.6746720095533" />
+      <entry key="D1" value="619.009350879968" />
+      <entry key="W1" value="646.2997346712166" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="2.0307066382957817E-188" />
-      <entry key="S5" value="8.376428300059895E-76" />
-      <entry key="S10" value="2.894205987841897E-38" />
-      <entry key="S30" value="3.0702693648436857E-13" />
-      <entry key="S60" value="5.541001146194951E-7" />
-      <entry key="M2" value="7.444101223194786E-4" />
-      <entry key="M5" value="0.05812074276765887" />
-      <entry key="M10" value="0.33326661240034006" />
-      <entry key="M15" value="0.7996768449917637" />
-      <entry key="M30" value="3.5483595919637807" />
-      <entry key="H1" value="12.22878000039475" />
-      <entry key="H2" value="27.33890416056039" />
-      <entry key="H4" value="43.20192389241088" />
-      <entry key="D1" value="65.17811182301" />
-      <entry key="W1" value="70.13275731180084" />
+      <entry key="S2" value="8.351394118423836E-264" />
+      <entry key="S5" value="5.870885247833808E-106" />
+      <entry key="S10" value="2.4230121576159797E-53" />
+      <entry key="S30" value="3.1164352786290923E-18" />
+      <entry key="S60" value="3.0629805781412323E-9" />
+      <entry key="M2" value="1.5911514353283824E-4" />
+      <entry key="M5" value="0.15082111801911877" />
+      <entry key="M10" value="1.7861531714900336" />
+      <entry key="M15" value="4.382719087190075" />
+      <entry key="M30" value="12.30278968649381" />
+      <entry key="H1" value="24.3398247512205" />
+      <entry key="H2" value="37.822377207548804" />
+      <entry key="H4" value="48.89149239136677" />
+      <entry key="D1" value="61.86048567240173" />
+      <entry key="W1" value="64.53864188534294" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9592641193252643" />
-      <entry key="MS500" value="0.9917167307382933" />
-      <entry key="S2" value="0.9979227189990506" />
-      <entry key="S5" value="0.999168569213607" />
-      <entry key="S10" value="0.9995841984253707" />
-      <entry key="S30" value="1.0018651714399929" />
-      <entry key="S60" value="1.1167772430722245" />
-      <entry key="M2" value="2.015818533664761" />
-      <entry key="M5" value="5.527585272730017" />
-      <entry key="M10" value="11.209023609888279" />
-      <entry key="M15" value="18.412938500550958" />
-      <entry key="M30" value="53.04425004241313" />
-      <entry key="H1" value="153.85275544756567" />
-      <entry key="H2" value="326.1380563851379" />
-      <entry key="H4" value="505.7224086143509" />
-      <entry key="D1" value="753.4868956744846" />
-      <entry key="W1" value="809.2435284041885" />
+      <entry key="MS100" value="0.8950250709279725" />
+      <entry key="MS500" value="0.9780634734473393" />
+      <entry key="S2" value="0.9944701686732144" />
+      <entry key="S5" value="0.9977843871238888" />
+      <entry key="S10" value="0.9988915792636801" />
+      <entry key="S30" value="0.999631172383825" />
+      <entry key="S60" value="1.0006998390828834" />
+      <entry key="M2" value="1.0310606875208674" />
+      <entry key="M5" value="2.4345302750387345" />
+      <entry key="M10" value="16.635639231139802" />
+      <entry key="M15" value="41.1668048616028" />
+      <entry key="M30" value="124.5002678972625" />
+      <entry key="H1" value="259.211067314519" />
+      <entry key="H2" value="411.1756081531684" />
+      <entry key="H4" value="535.546293758595" />
+      <entry key="D1" value="680.8656995232674" />
+      <entry key="W1" value="710.837761526931" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -128,37 +112,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "FastAPI.GlitchRecon.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/home/argus/Documents/GlitchRecon",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;FastAPI.GlitchRecon.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/argus/Documents/GlitchRecon&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql",
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;,
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/features/auth" />
       <recent name="$PROJECT_DIR$/core" />
     </key>
   </component>
@@ -200,7 +182,7 @@
       <workItem from="1781302693201" duration="6101000" />
       <workItem from="1781317350410" duration="3209000" />
       <workItem from="1781778953005" duration="207000" />
-      <workItem from="1781792588944" duration="7183000" />
+      <workItem from="1781792588944" duration="742000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented the first pass of the safety/validation work">
       <option name="closed" value="true" />
@@ -210,23 +192,7 @@
       <option name="project" value="LOCAL" />
       <updated>1781792624472</updated>
     </task>
-    <task id="LOCAL-00002" summary="delete unwired files in ai folder">
-      <option name="closed" value="true" />
-      <created>1781793359755</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1781793359755</updated>
-    </task>
-    <task id="LOCAL-00003" summary="implement react">
-      <option name="closed" value="true" />
-      <created>1781797996086</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1781797996086</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,9 +212,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="remove useless files/ write readme/ hide some important file .gitignore" />
     <MESSAGE value="Implemented the first pass of the safety/validation work" />
-    <MESSAGE value="delete unwired files in ai folder" />
-    <MESSAGE value="implement react" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement react" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented the first pass of the safety/validation work" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/GlitchRecon$GlitchRecon.coverage" NAME="GlitchRecon Coverage Results" MODIFIED="1781319773831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
