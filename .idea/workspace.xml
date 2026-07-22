@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="remove ai folder">
+    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="implement llm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/providers/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/providers/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/providers/groq.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/providers/groq.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/providers/ollama.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/providers/ollama.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/prompts/analysis.md" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/prompts/analysis.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/prompts/intake.md" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/prompts/intake.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/prompts/planning.md" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/prompts/planning.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/prompts/remediation.md" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/prompts/remediation.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/prompts/reporting.md" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/prompts/reporting.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/prompts/triage.md" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/prompts/triage.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/dependencies.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,61 +56,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0001649138286786" />
-      <entry key="S2" value="1.1133220098942922" />
-      <entry key="S5" value="1.4185291461759941" />
-      <entry key="S10" value="1.6469393595018633" />
-      <entry key="S30" value="1.8927946758740581" />
-      <entry key="S60" value="2.500287453280434" />
-      <entry key="M2" value="6.336265022762637" />
-      <entry key="M5" value="21.56635244805144" />
-      <entry key="M10" value="39.44584182328233" />
-      <entry key="M15" value="56.92807356346632" />
-      <entry key="M30" value="120.21873068457718" />
-      <entry key="H1" value="240.43725991592672" />
-      <entry key="H2" value="390.58194276027535" />
-      <entry key="H4" value="520.7334375573805" />
-      <entry key="D1" value="678.9211334946494" />
-      <entry key="W1" value="712.2395328156315" />
+      <entry key="MS100" value="1.0081588343308312" />
+      <entry key="MS500" value="1.5229552509979762" />
+      <entry key="S2" value="2.9568560207603394" />
+      <entry key="S5" value="3.9176846420420097" />
+      <entry key="S10" value="4.514490287412174" />
+      <entry key="S30" value="6.2400414736308525" />
+      <entry key="S60" value="7.9457640355806705" />
+      <entry key="M2" value="12.068274077173704" />
+      <entry key="M5" value="27.332839666539183" />
+      <entry key="M10" value="46.18201182329567" />
+      <entry key="M15" value="62.251341237758034" />
+      <entry key="M30" value="115.36940670386994" />
+      <entry key="H1" value="229.04877509027787" />
+      <entry key="H2" value="391.38843554287894" />
+      <entry key="H4" value="544.8568516111997" />
+      <entry key="D1" value="743.2882686196484" />
+      <entry key="W1" value="786.4862677201022" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="1.422996348744777E-141" />
-      <entry key="S2" value="1.1980268014019427E-35" />
-      <entry key="S5" value="2.3538104134615996E-14" />
-      <entry key="S10" value="3.0431272459129987E-7" />
-      <entry key="S30" value="0.016919091554203028" />
-      <entry key="S60" value="0.2622222457284896" />
-      <entry key="M2" value="1.1124829022237719" />
-      <entry key="M5" value="3.2086630998892516" />
-      <entry key="M10" value="5.292390333135266" />
-      <entry key="M15" value="7.276861986137167" />
-      <entry key="M30" value="14.01420102617591" />
-      <entry key="H1" value="26.035468153145878" />
-      <entry key="H2" value="40.805805046038884" />
-      <entry key="H4" value="53.59576871691195" />
-      <entry key="D1" value="69.15436394095204" />
-      <entry key="W1" value="72.43309112237026" />
+      <entry key="MS500" value="1.8153899385088336E-163" />
+      <entry key="S2" value="2.0641558323673568E-41" />
+      <entry key="S5" value="5.3198206680665733E-17" />
+      <entry key="S10" value="7.293710076543059E-9" />
+      <entry key="S30" value="0.001939320100124155" />
+      <entry key="S60" value="0.04403771225763456" />
+      <entry key="M2" value="0.20985803380697174" />
+      <entry key="M5" value="0.5612117415724667" />
+      <entry key="M10" value="1.2054779787108199" />
+      <entry key="M15" value="2.268106888859783" />
+      <entry key="M30" value="7.169936485510934" />
+      <entry key="H1" value="18.362268739414173" />
+      <entry key="H2" value="34.345821654005064" />
+      <entry key="H4" value="49.45533521702324" />
+      <entry key="D1" value="69.00281871439705" />
+      <entry key="W1" value="73.25956171794788" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9265880618903709" />
-      <entry key="MS500" value="0.9850288609913855" />
-      <entry key="S2" value="1.109085761902032" />
-      <entry key="S5" value="1.4163676458043526" />
-      <entry key="S10" value="1.6456842390573845" />
-      <entry key="S30" value="1.9077193196987723" />
-      <entry key="S60" value="2.7517079628814645" />
-      <entry key="M2" value="7.427086637701833" />
-      <entry key="M5" value="24.751489211217887" />
-      <entry key="M10" value="44.71790541551691" />
-      <entry key="M15" value="64.1826971940961" />
-      <entry key="M30" value="134.20188856032885" />
-      <entry key="H1" value="266.4376722549108" />
-      <entry key="H2" value="431.3583631184564" />
-      <entry key="H4" value="574.3095053018577" />
-      <entry key="D1" value="748.0712192272292" />
-      <entry key="W1" value="784.6719831589324" />
+      <entry key="MS100" value="0.617632261840953" />
+      <entry key="MS500" value="1.4010993692849956" />
+      <entry key="S2" value="2.904759495748674" />
+      <entry key="S5" value="3.8912500644495793" />
+      <entry key="S10" value="4.498705894863818" />
+      <entry key="S30" value="6.23071856405135" />
+      <entry key="S60" value="7.979748152149662" />
+      <entry key="M2" value="12.269307980544644" />
+      <entry key="M5" value="27.88570988936055" />
+      <entry key="M10" value="47.378603756392856" />
+      <entry key="M15" value="64.50911138620637" />
+      <entry key="M30" value="122.52171024626479" />
+      <entry key="H1" value="247.38547053544823" />
+      <entry key="H2" value="425.70909082526737" />
+      <entry key="H4" value="594.2937840588148" />
+      <entry key="D1" value="812.2867797301341" />
+      <entry key="W1" value="859.7451757656693" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -236,7 +242,15 @@
       <option name="project" value="LOCAL" />
       <updated>1784734571534</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="implement llm">
+      <option name="closed" value="true" />
+      <created>1784735730610</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1784735730610</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,7 +275,8 @@
     <MESSAGE value="refactor the file structure" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="remove ai folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove ai folder" />
+    <MESSAGE value="implement llm" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement llm" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/GlitchRecon$GlitchRecon.coverage" NAME="GlitchRecon Coverage Results" MODIFIED="1781319773831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
