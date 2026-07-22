@@ -1,5 +1,5 @@
-from app.dependencies import get_llm_provider
+from glitchrecon.cli import main
 
-llm = get_llm_provider()
-answer = llm.generate("Hello What is your model?")
-print(answer)
+
+if __name__ == "__main__":
+    raise SystemExit(main())
