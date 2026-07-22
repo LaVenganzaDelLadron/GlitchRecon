@@ -1,4 +1,4 @@
-from glitchrecon import cli
+from app import cli
 
 
 class FakeProvider:

@@ -1,14 +1,9 @@
-"""Command-line interface for GlitchRecon."""
-
 from __future__ import annotations
 
 import argparse
 from collections.abc import Callable, Sequence
-
-from glitchrecon.config import get_llm_provider
-from glitchrecon.providers import LLMProvider
-
-DEFAULT_PROMPT = "Hello What is your model?"
+from app.config import get_llm_provider
+from app.core.base import LLMProvider
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
@@ -21,11 +16,10 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def main(
-    argv: Sequence[str] | None = None,
-    provider_factory: Callable[[], LLMProvider] = get_llm_provider,
-) -> int:
+def main(argv: Sequence[str] | None = None, provider_factory: Callable[[], LLMProvider] = get_llm_provider,) -> int:
     """Run the CLI and return a process exit code."""
+
+    DEFAULT_PROMPT = input("Enter a word: ")
 
     args = parse_args(argv)
     prompt = " ".join(args.prompt) if args.prompt else DEFAULT_PROMPT
