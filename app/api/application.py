@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 
 from app.api.routes import report_router, scan_router
 
@@ -17,6 +20,13 @@ def create_app() -> FastAPI:
     )
     application.include_router(scan_router)
     application.include_router(report_router)
+
+    @application.get("/", include_in_schema=False)
+    async def dashboard() -> FileResponse:
+        """Serve the single-page scan dashboard."""
+
+        return FileResponse(Path(__file__).parents[2] / "index.html")
+
     return application
 
 

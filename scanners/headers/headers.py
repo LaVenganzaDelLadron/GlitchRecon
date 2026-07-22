@@ -33,7 +33,11 @@ class HeaderScanner(Scanner):
                     severity="Low",
                     description=f"{header} is missing.",
                     evidence={
-                        "header": header
+                        "observation": "header_absent",
+                        "header_checked": header,
+                        "header_present": False,
+                        "response_status_code": response.status_code,
+                        "response_url": str(response.url),
                     },
                     scanner_name=self.name,
                 )

@@ -26,7 +26,14 @@ class CookieScanner(Scanner):
                     severity="Medium",
                     description="Cookie is missing Secure flag.",
                     evidence={
-                        "cookie": cookie.name
+                        "observation": "cookie_secure_flag_absent",
+                        "cookie_name": cookie.name,
+                        "cookie_domain": cookie.domain,
+                        "cookie_path": cookie.path,
+                        "secure_observed": False,
+                        "httponly_observed": httponly,
+                        "response_status_code": response.status_code,
+                        "response_url": str(response.url),
                     },
                     scanner_name=self.name,
                 )
@@ -38,7 +45,14 @@ class CookieScanner(Scanner):
                     severity="Medium",
                     description="Cookie is accessible via JavaScript.",
                     evidence={
-                        "cookie": cookie.name
+                        "observation": "cookie_httponly_flag_absent",
+                        "cookie_name": cookie.name,
+                        "cookie_domain": cookie.domain,
+                        "cookie_path": cookie.path,
+                        "secure_observed": secure,
+                        "httponly_observed": False,
+                        "response_status_code": response.status_code,
+                        "response_url": str(response.url),
                     },
                     scanner_name=self.name,
                 )
