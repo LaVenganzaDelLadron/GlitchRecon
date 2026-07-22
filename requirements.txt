@@ -5,3 +5,4 @@ ollama
 fastapi
 pydantic
 httpx
+uvicorn[standard]
