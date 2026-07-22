@@ -1,4 +1,6 @@
+#app/core/provider/groq.py
 import os
+import asyncio
 from app.core.base import LLMProvider
 
 
@@ -34,10 +36,12 @@ class GroqProvider(LLMProvider):
             "GROQ_MODEL", "openai/gpt-oss-20b"
         )
 
-    def generate(self, prompt: str, model: str | None = None) -> str:
-        response = self.client.responses.create(
+    async def generate(self, prompt: str, model: str | None = None) -> str:
+        """Generate a response without blocking the application's event loop."""
+
+        response = await asyncio.to_thread(
+            self.client.responses.create,
             input=prompt,
             model=model or self.default_model,
         )
         return response.output_text.strip()
-
