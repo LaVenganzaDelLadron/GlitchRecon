@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="remove ai folder">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/providers/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/providers/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/providers/groq.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/providers/groq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ai_pipeline/providers/ollama.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_pipeline/providers/ollama.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +25,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -40,61 +50,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.1800055372729306" />
-      <entry key="MS500" value="3.7791449725919652" />
-      <entry key="S2" value="4.610488352469131" />
-      <entry key="S5" value="4.835410890535851" />
-      <entry key="S10" value="4.91733911827394" />
-      <entry key="S30" value="5.077778117736024" />
-      <entry key="S60" value="5.311797126986994" />
-      <entry key="M2" value="5.581291169176784" />
-      <entry key="M5" value="6.823631697341393" />
-      <entry key="M10" value="18.285256673528547" />
-      <entry key="M15" value="39.15642580511655" />
-      <entry key="M30" value="113.11733005222533" />
-      <entry key="H1" value="235.5601672681107" />
-      <entry key="H2" value="374.9100669388831" />
-      <entry key="H4" value="489.4052136018007" />
-      <entry key="D1" value="623.5273227347213" />
-      <entry key="W1" value="651.2278136696332" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0001649138286786" />
+      <entry key="S2" value="1.1133220098942922" />
+      <entry key="S5" value="1.4185291461759941" />
+      <entry key="S10" value="1.6469393595018633" />
+      <entry key="S30" value="1.8927946758740581" />
+      <entry key="S60" value="2.500287453280434" />
+      <entry key="M2" value="6.336265022762637" />
+      <entry key="M5" value="21.56635244805144" />
+      <entry key="M10" value="39.44584182328233" />
+      <entry key="M15" value="56.92807356346632" />
+      <entry key="M30" value="120.21873068457718" />
+      <entry key="H1" value="240.43725991592672" />
+      <entry key="H2" value="390.58194276027535" />
+      <entry key="H4" value="520.7334375573805" />
+      <entry key="D1" value="678.9211334946494" />
+      <entry key="W1" value="712.2395328156315" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="2.0258261595009043E-278" />
-      <entry key="S5" value="8.368369924245835E-112" />
-      <entry key="S10" value="2.892838790455155E-56" />
-      <entry key="S30" value="3.3060873589052765E-19" />
-      <entry key="S60" value="9.976365447440257E-10" />
-      <entry key="M2" value="9.08083047533619E-5" />
-      <entry key="M5" value="0.12051130160090753" />
-      <entry key="M10" value="1.5966197961967248" />
-      <entry key="M15" value="4.06691887107532" />
-      <entry key="M30" value="11.851260293252752" />
-      <entry key="H1" value="23.888996971600378" />
-      <entry key="H2" value="37.470462686803735" />
-      <entry key="H4" value="48.66350783998266" />
-      <entry key="D1" value="61.81231534473076" />
-      <entry key="W1" value="64.53146008978294" />
+      <entry key="MS500" value="1.422996348744777E-141" />
+      <entry key="S2" value="1.1980268014019427E-35" />
+      <entry key="S5" value="2.3538104134615996E-14" />
+      <entry key="S10" value="3.0431272459129987E-7" />
+      <entry key="S30" value="0.016919091554203028" />
+      <entry key="S60" value="0.2622222457284896" />
+      <entry key="M2" value="1.1124829022237719" />
+      <entry key="M5" value="3.2086630998892516" />
+      <entry key="M10" value="5.292390333135266" />
+      <entry key="M15" value="7.276861986137167" />
+      <entry key="M30" value="14.01420102617591" />
+      <entry key="H1" value="26.035468153145878" />
+      <entry key="H2" value="40.805805046038884" />
+      <entry key="H4" value="53.59576871691195" />
+      <entry key="D1" value="69.15436394095204" />
+      <entry key="W1" value="72.43309112237026" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="2.118144542756845" />
-      <entry key="MS500" value="3.756669564016374" />
-      <entry key="S2" value="4.603508933831629" />
-      <entry key="S5" value="4.832470290265218" />
-      <entry key="S10" value="4.915840718400678" />
-      <entry key="S30" value="5.077233734296509" />
-      <entry key="S60" value="5.311483492284952" />
-      <entry key="M2" value="5.581197089263909" />
-      <entry key="M5" value="6.942376267157984" />
-      <entry key="M10" value="19.8689387589564" />
-      <entry key="M15" value="43.19953252385056" />
-      <entry key="M30" value="124.93045268579435" />
-      <entry key="H1" value="259.40965924118706" />
-      <entry key="H2" value="412.3497450709285" />
-      <entry key="H4" value="538.048942398734" />
-      <entry key="D1" value="685.33550409533" />
-      <entry key="W1" value="715.7586587730138" />
+      <entry key="MS100" value="0.9265880618903709" />
+      <entry key="MS500" value="0.9850288609913855" />
+      <entry key="S2" value="1.109085761902032" />
+      <entry key="S5" value="1.4163676458043526" />
+      <entry key="S10" value="1.6456842390573845" />
+      <entry key="S30" value="1.9077193196987723" />
+      <entry key="S60" value="2.7517079628814645" />
+      <entry key="M2" value="7.427086637701833" />
+      <entry key="M5" value="24.751489211217887" />
+      <entry key="M10" value="44.71790541551691" />
+      <entry key="M15" value="64.1826971940961" />
+      <entry key="M30" value="134.20188856032885" />
+      <entry key="H1" value="266.4376722549108" />
+      <entry key="H2" value="431.3583631184564" />
+      <entry key="H4" value="574.3095053018577" />
+      <entry key="D1" value="748.0712192272292" />
+      <entry key="W1" value="784.6719831589324" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -112,33 +122,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;FastAPI.GlitchRecon.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/argus/Documents/GlitchRecon&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "FastAPI.GlitchRecon.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "working-with-llmprovider",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/argus/Documents/GlitchRecon",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;,
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql",
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/core" />
@@ -151,7 +162,8 @@
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$USER_HOME$/Desktop/.venv/bin/python" />
+      <option name="SDK_NAME" value="Python 3.14 (.venv)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -216,7 +228,15 @@
       <option name="project" value="LOCAL" />
       <updated>1784734489492</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="remove ai folder">
+      <option name="closed" value="true" />
+      <created>1784734571534</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1784734571534</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,7 +260,8 @@
     <MESSAGE value="refactor the system" />
     <MESSAGE value="refactor the file structure" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <MESSAGE value="remove ai folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove ai folder" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/GlitchRecon$GlitchRecon.coverage" NAME="GlitchRecon Coverage Results" MODIFIED="1781319773831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
