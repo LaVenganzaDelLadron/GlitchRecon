@@ -1,4 +1,5 @@
 import os
+import asyncio
 from app.core.base import LLMProvider
 
 
@@ -21,12 +22,16 @@ class OllamaProvider(LLMProvider):
         self.client = Client(host=configured_host or None, timeout=timeout)
         self.default_model = default_model or os.getenv("OLLAMA_MODEL")
 
-    def generate(self, prompt: str, model: str | None = None) -> str:
+    async def generate(self, prompt: str, model: str | None = None) -> str:
+        """Generate a response without blocking the application's event loop."""
+
         selected_model = model or self.default_model
         if not selected_model:
             raise ValueError("OLLAMA_MODEL must be set to use the Ollama provider")
 
-        response = self.client.generate(model=selected_model, prompt=prompt)
+        response = await asyncio.to_thread(
+            self.client.generate, model=selected_model, prompt=prompt
+        )
 
         if isinstance(response, str):
             return response.strip()

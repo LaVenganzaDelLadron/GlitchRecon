@@ -2,3 +2,6 @@ python-dotenv
 pytest
 openai
 ollama
+fastapi
+pydantic
+httpx
