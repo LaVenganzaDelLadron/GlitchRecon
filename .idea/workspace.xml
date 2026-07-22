@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="implement operational dashboard">
-      <change beforePath="$PROJECT_DIR$/src/app/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/routes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/routes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/pages/Landing.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/pages/Landing.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Login.jsx" beforeDir="false" />
-    </list>
+    <list default="true" id="0acc19be-1185-4fb8-a9d2-d84ae5a9758e" name="Changes" comment="implement operational dashboard" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="19" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -37,66 +34,70 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/LaVenganzaDelLadron/GlitchRecon.git&quot;,
-    &quot;accountId&quot;: &quot;ab93fa26-b44b-43ad-a923-c376aede1b1b&quot;
+    &quot;accountId&quot;: &quot;865aa70e-6cd0-406a-bb0a-ab54717e1b3b&quot;
   }
 }</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.1800055372729306" />
-      <entry key="MS500" value="3.7791449725919652" />
-      <entry key="S2" value="4.610488352469131" />
-      <entry key="S5" value="4.835410890535851" />
-      <entry key="S10" value="4.91733911827394" />
-      <entry key="S30" value="5.077778117736024" />
-      <entry key="S60" value="5.311797126986994" />
-      <entry key="M2" value="5.581291169176784" />
-      <entry key="M5" value="6.823631697341393" />
-      <entry key="M10" value="18.285256673528547" />
-      <entry key="M15" value="39.15642580511655" />
-      <entry key="M30" value="113.11733005222533" />
-      <entry key="H1" value="235.5601672681107" />
-      <entry key="H2" value="374.9100669388831" />
-      <entry key="H4" value="489.4052136018007" />
-      <entry key="D1" value="623.5273227347213" />
-      <entry key="W1" value="651.2278136696332" />
+      <entry key="MS100" value="1.6581628284449468" />
+      <entry key="MS500" value="3.517223294476358" />
+      <entry key="S2" value="9.011636861268615" />
+      <entry key="S5" value="16.751644029234487" />
+      <entry key="S10" value="23.31647895666493" />
+      <entry key="S30" value="33.225725803520504" />
+      <entry key="S60" value="39.53393845771526" />
+      <entry key="M2" value="44.608717331442136" />
+      <entry key="M5" value="49.54347894442402" />
+      <entry key="M10" value="61.65324601496664" />
+      <entry key="M15" value="82.2310883044035" />
+      <entry key="M30" value="155.5717943093552" />
+      <entry key="H1" value="278.0551321836277" />
+      <entry key="H2" value="418.16920145665364" />
+      <entry key="H4" value="533.6281464143063" />
+      <entry key="D1" value="669.1516739304443" />
+      <entry key="W1" value="697.1718035229989" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="2.0258261595009043E-278" />
-      <entry key="S5" value="8.368369924245835E-112" />
-      <entry key="S10" value="2.892838790455155E-56" />
-      <entry key="S30" value="3.3060873589052765E-19" />
-      <entry key="S60" value="9.976365447440257E-10" />
-      <entry key="M2" value="9.08083047533619E-5" />
-      <entry key="M5" value="0.12051130160090753" />
-      <entry key="M10" value="1.5966197961967248" />
-      <entry key="M15" value="4.06691887107532" />
-      <entry key="M30" value="11.851260293252752" />
-      <entry key="H1" value="23.888996971600378" />
-      <entry key="H2" value="37.470462686803735" />
-      <entry key="H4" value="48.66350783998266" />
-      <entry key="D1" value="61.81231534473076" />
-      <entry key="W1" value="64.53146008978294" />
+      <entry key="MS100" value="5.689107618605689E-25" />
+      <entry key="MS500" value="1.4158225654163858E-5" />
+      <entry key="S2" value="0.061341191490842426" />
+      <entry key="S5" value="0.32741674222321737" />
+      <entry key="S10" value="0.5722034098318688" />
+      <entry key="S30" value="0.8302014364870643" />
+      <entry key="S60" value="0.9111539042692053" />
+      <entry key="M2" value="0.9546032222846126" />
+      <entry key="M5" value="1.0832583603000532" />
+      <entry key="M10" value="2.4574255823051225" />
+      <entry key="M15" value="4.836984748226115" />
+      <entry key="M30" value="12.517540344435153" />
+      <entry key="H1" value="24.551865963935036" />
+      <entry key="H2" value="38.205573015130796" />
+      <entry key="H4" value="49.4913119464673" />
+      <entry key="D1" value="62.7758253407026" />
+      <entry key="W1" value="65.52601694996348" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="2.118144542756845" />
-      <entry key="MS500" value="3.756669564016374" />
-      <entry key="S2" value="4.603508933831629" />
-      <entry key="S5" value="4.832470290265218" />
-      <entry key="S10" value="4.915840718400678" />
-      <entry key="S30" value="5.077233734296509" />
-      <entry key="S60" value="5.311483492284952" />
-      <entry key="M2" value="5.581197089263909" />
-      <entry key="M5" value="6.942376267157984" />
-      <entry key="M10" value="19.8689387589564" />
-      <entry key="M15" value="43.19953252385056" />
-      <entry key="M30" value="124.93045268579435" />
-      <entry key="H1" value="259.40965924118706" />
-      <entry key="H2" value="412.3497450709285" />
-      <entry key="H4" value="538.048942398734" />
-      <entry key="D1" value="685.33550409533" />
-      <entry key="W1" value="715.7586587730138" />
+      <entry key="MS100" value="1.5917355824607375" />
+      <entry key="MS500" value="3.4904981931236616" />
+      <entry key="S2" value="9.045743548494583" />
+      <entry key="S5" value="17.044749237581627" />
+      <entry key="S10" value="23.860259975226494" />
+      <entry key="S30" value="34.0404783927788" />
+      <entry key="S60" value="40.435386223274904" />
+      <entry key="M2" value="45.55766539418664" />
+      <entry key="M5" value="50.622797403746866" />
+      <entry key="M10" value="64.09751712388831" />
+      <entry key="M15" value="87.04471403645294" />
+      <entry key="M30" value="168.05182708992476" />
+      <entry key="H1" value="302.56782979600865" />
+      <entry key="H2" value="456.344097408852" />
+      <entry key="H4" value="583.0996943132347" />
+      <entry key="D1" value="731.9233585718506" />
+      <entry key="W1" value="762.6972042307221" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -114,46 +115,52 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;FastAPI.GlitchRecon.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/argus/Documents/GlitchRecon&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "FastAPI.GlitchRecon.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/darkglitch/Documents/MyProject/GlitchRecon",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;,
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql",
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/core" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="GlitchRecon" type="Python.FastAPI">
+      <option name="asgi" value="FASTAPI_DEV" />
       <option name="file" value="$PROJECT_DIR$/main.py" />
       <module name="GlitchRecon" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$USER_HOME$/Desktop/.venv/bin/python" />
+      <option name="SDK_NAME" value="Python 3.14 (.venv)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -168,7 +175,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-c59985aa861c-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.24374.152" />
+        <option value="bundled-python-sdk-245168a56dbd-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.25134.203" />
       </set>
     </attachedChunks>
   </component>
@@ -185,6 +192,15 @@
       <workItem from="1781317350410" duration="3209000" />
       <workItem from="1781778953005" duration="207000" />
       <workItem from="1781792588944" duration="742000" />
+      <workItem from="1781860829353" duration="102000" />
+      <workItem from="1781925465438" duration="4716000" />
+      <workItem from="1781936980320" duration="2171000" />
+      <workItem from="1781947177450" duration="4346000" />
+      <workItem from="1782641752263" duration="871000" />
+      <workItem from="1782644501598" duration="25000" />
+      <workItem from="1783169214011" duration="948000" />
+      <workItem from="1784731016868" duration="864000" />
+      <workItem from="1784731892146" duration="1188000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented the first pass of the safety/validation work">
       <option name="closed" value="true" />
@@ -226,6 +242,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="implement operational dashboard" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/GlitchRecon$GlitchRecon.coverage" NAME="GlitchRecon Coverage Results" MODIFIED="1781319773831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/GlitchRecon$GlitchRecon.coverage" NAME="GlitchRecon Coverage Results" MODIFIED="1784732461082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
