@@ -6,7 +6,9 @@ import os
 
 from dotenv import load_dotenv
 
-from glitchrecon.providers import GroqProvider, LLMProvider, OllamaProvider
+from app.core.base import LLMProvider
+from app.core.provider.groq import GroqProvider
+from app.core.provider.ollama import OllamaProvider
 
 load_dotenv()
 

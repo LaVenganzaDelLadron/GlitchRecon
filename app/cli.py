@@ -5,8 +5,8 @@ from __future__ import annotations
 import argparse
 from collections.abc import Callable, Sequence
 
-from glitchrecon.config import get_llm_provider
-from glitchrecon.providers import LLMProvider
+from app.config import get_llm_provider
+from app.core.base import LLMProvider
 
 DEFAULT_PROMPT = "Hello What is your model?"
 

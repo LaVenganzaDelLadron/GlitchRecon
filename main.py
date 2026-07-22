@@ -1,4 +1,4 @@
-from glitchrecon.cli import main
+from app.cli import main
 
 
 if __name__ == "__main__":

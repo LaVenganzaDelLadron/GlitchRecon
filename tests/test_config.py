@@ -1,7 +1,7 @@
 import pytest
 
-from glitchrecon import config
-from glitchrecon.providers import GroqProvider
+from app import config
+from app.providers import GroqProvider
 
 
 def test_selects_groq_by_default(monkeypatch: pytest.MonkeyPatch) -> None:
