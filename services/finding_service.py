@@ -59,13 +59,13 @@ class FindingService:
             supplied_confidence=supplied_confidence,
         )
         finding_data: dict[str, Any] = {
-            title=str(data.get("title") or "Untitled finding").strip(),
-            severity=severity,
-            confidence=confidence,
-            description=str(data.get("description") or "No description provided.").strip(),
-            evidence=evidence,
-            remediation=data.get("remediation"),
-            scanner_name=str(data.get("scanner_name") or "unknown-scanner").strip(),
+            "title": str(data.get("title") or "Untitled finding").strip(),
+            "severity": severity,
+            "confidence": confidence,
+            "description": str(data.get("description") or "No description provided.").strip(),
+            "evidence": evidence,
+            "remediation": data.get("remediation"),
+            "scanner_name": str(data.get("scanner_name") or "unknown-scanner").strip(),
         }
         if data.get("id"):
             finding_data["id"] = data["id"]

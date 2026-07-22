@@ -2,6 +2,7 @@ python-dotenv
 pytest
 openai
 ollama
-fastapi
-pydantic
+fastapi>=0.110
+pydantic>=2.0
 httpx
+uvicorn[standard]

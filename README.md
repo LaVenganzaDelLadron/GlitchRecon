@@ -1,39 +1,58 @@
 # GlitchRecon
 
-A small command-line client for sending prompts to Groq or Ollama.
+An evidence-driven web vulnerability scanner with AI-assisted analysis and
+reporting. Scanners collect the evidence; the LLM only enriches, prioritizes,
+and reports on the findings.
 
-## Setup
+## Run the API
+
+Create and activate a virtual environment, then install the dependencies:
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env
 ```
 
-Configure one provider in `.env`:
+Create a `.env` file and select an LLM provider. For Groq:
 
-- Groq (the default): set `GROQ_API_KEY`; optionally set `GROQ_MODEL`,
-  `GROQ_BASE_URL`, and `GROQ_TIMEOUT`.
-- Ollama: set `LLM_PROVIDER=ollama` and `OLLAMA_MODEL`; optionally set
-  `OLLAMA_HOST` and `OLLAMA_TIMEOUT`.
+```dotenv
+LLM_PROVIDER=groq
+GROQ_API_KEY=your_groq_api_key
+GROQ_MODEL=openai/gpt-oss-20b
+```
 
-## Usage
+Or, for a running local Ollama instance:
 
-Run the default prompt:
+```dotenv
+LLM_PROVIDER=ollama
+OLLAMA_MODEL=llama3.2
+OLLAMA_HOST=http://localhost:11434
+```
+
+Start the server:
 
 ```bash
-python main.py
+uvicorn app.api.application:app --reload
 ```
 
-Send a custom prompt:
+Open `http://127.0.0.1:8000/docs` for the interactive API documentation.
+
+Start an authorized scan with curl:
 
 ```bash
-python main.py "Explain what model you are."
+curl -X POST http://127.0.0.1:8000/scans \
+  -H 'Content-Type: application/json' \
+  -d '{"target":"https://example.com"}'
 ```
 
-Run tests without contacting an LLM service:
+The response is the completed report. The service also stores the scan in the
+configured repository for the lifetime of this API process. Use the returned
+scan ID to retrieve it later:
 
 ```bash
-pytest
+curl http://127.0.0.1:8000/scans/<scan-id>
+curl http://127.0.0.1:8000/reports/<scan-id>
 ```
+
+Only scan targets you own or are explicitly authorized to test.
