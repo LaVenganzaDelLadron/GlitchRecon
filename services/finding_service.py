@@ -59,6 +59,7 @@ class FindingService:
             supplied_confidence=supplied_confidence,
         )
         finding_data: dict[str, Any] = {
+            "scanner_id": str(data.get("scanner_id") or data.get("scanner_name") or "unknown-scanner").strip(),
             "title": str(data.get("title") or "Untitled finding").strip(),
             "severity": severity,
             "confidence": confidence,
@@ -66,6 +67,7 @@ class FindingService:
             "evidence": evidence,
             "remediation": data.get("remediation"),
             "scanner_name": str(data.get("scanner_name") or "unknown-scanner").strip(),
+            "references": [str(reference) for reference in data.get("references", [])],
         }
         if data.get("id"):
             finding_data["id"] = data["id"]
@@ -127,7 +129,7 @@ class FindingService:
         """Create a stable deduplication key from scanner evidence."""
 
         evidence = json.dumps(finding.evidence, sort_keys=True, default=str)
-        return f"{finding.scanner_name.casefold()}|{finding.title.casefold()}|{evidence}"
+        return f"{finding.scanner_id.casefold()}|{finding.title.casefold()}|{evidence}"
 
     def _higher_severity(self, first: Severity, second: Severity) -> Severity:
         """Return the higher-priority severity."""

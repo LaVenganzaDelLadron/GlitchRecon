@@ -6,12 +6,12 @@ from functools import lru_cache
 
 from app.config import get_llm_provider
 from app.pipeline.pipeline import Pipeline
-from app.pipeline.stages import FingerprintingStage, ReconStage, ValidationStage
+from app.pipeline.stages import ScannerExecutionStage, ValidationStage
 from repositories.finding_repository import FindingRepository
 from repositories.report_repository import ReportRepository
 from repositories.scan_repository import ScanRepository
-from scanners.cookies.cookies import CookieScanner
-from scanners.headers.headers import HeaderScanner
+from scanners.manager import ScannerManager
+from scanners.registry import ScannerRegistry
 from services.ai_service import AIService
 from services.finding_service import FindingService
 from services.scan_service import ScanService
@@ -38,13 +38,28 @@ def get_report_repository() -> ReportRepository:
     return ReportRepository()
 
 
+@lru_cache
+def get_scanner_registry() -> ScannerRegistry:
+    """Discover scanner plugins once for the process lifetime."""
+
+    registry = ScannerRegistry()
+    registry.discover()
+    return registry
+
+
+@lru_cache
+def get_scanner_manager() -> ScannerManager:
+    """Return the scanner execution coordinator."""
+
+    return ScannerManager(get_scanner_registry())
+
+
 def get_pipeline() -> Pipeline:
     """Build the default scanner pipeline for one request."""
 
     pipeline = Pipeline()
     pipeline.add_stage(ValidationStage())
-    pipeline.add_stage(FingerprintingStage())
-    pipeline.add_stage(ReconStage([HeaderScanner(), CookieScanner()]))
+    pipeline.add_stage(ScannerExecutionStage(get_scanner_manager()))
     return pipeline
 
 

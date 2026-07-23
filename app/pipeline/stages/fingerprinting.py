@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from app.pipeline.base import PipelineStage
 from app.pipeline.context import PipelineContext
-from scanners.fingerprinting.fingerprinting import FingerprintScanner
+from scanners.misconfiguration.fingerprinting import FingerprintScanner
 
 
 class FingerprintingStage(PipelineStage):

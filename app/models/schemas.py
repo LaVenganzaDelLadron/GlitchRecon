@@ -39,11 +39,13 @@ class Finding(BaseModel):
     """Evidence produced by a scanner and optionally enriched by the AI."""
 
     id: str = Field(default_factory=lambda: str(uuid4()))
+    scanner_id: str = Field(min_length=1, max_length=120)
     title: str = Field(min_length=1, max_length=300)
     severity: Severity
     confidence: float = Field(ge=0.0, le=1.0)
     description: str = Field(min_length=1)
     evidence: dict[str, Any] = Field(default_factory=dict)
+    references: list[str] = Field(default_factory=list)
     remediation: str | None = None
     scanner_name: str = Field(min_length=1, max_length=120)
     timestamp: datetime = Field(default_factory=utc_now)
