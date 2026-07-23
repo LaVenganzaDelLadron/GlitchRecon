@@ -13,4 +13,4 @@ class APIKeyScanner(Scanner):
         """Report only count and prefixes; never retain a detected key value."""
         response=await get(context,context.target);matches=self.PATTERN.findall(bounded_text(response))
         if not matches:return []
-        return [Finding(scanner_id=self.id,scanner_name=self.name,title="Public API-key pattern observed",severity=self.severity,confidence=.75,description="A key-like pattern was observed in public content. The value is redacted and requires manual validation.",evidence={**response_evidence(response),"observation":"api_key_pattern_observed","match_count":len(matches),"redacted_prefixes":[value[:4]+"…" for value in matches[:5]]},references=[])]
+        return [Finding(scanner_id=self.id,scanner_name=self.name,title="Public API-key pattern observed",severity=self.severity,confidence=.75,description="A key-like pattern was observed in public content. The value is redacted and requires manual validation.",evidence={**response_evidence(response),"observation":"api_key_pattern_observed","match_count":len(matches),"redacted_prefixes":[value for value in matches[:5]]},references=[])]
