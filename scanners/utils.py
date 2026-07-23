@@ -56,6 +56,23 @@ async def get(
         return await client.get(url, headers=request_headers)
 
 
+async def request(
+    context: PipelineContext,
+    method: str,
+    url: str,
+    *,
+    headers: Mapping[str, str] | None = None,
+) -> httpx.Response:
+    """Issue one bounded HTTP request, reusing the manager client when available."""
+
+    request_headers = {"User-Agent": USER_AGENT, **(dict(headers) if headers else {})}
+    shared_client = getattr(context, "http_client", None)
+    if isinstance(shared_client, httpx.AsyncClient):
+        return await shared_client.request(method, url, headers=request_headers, follow_redirects=True)
+    async with httpx.AsyncClient(timeout=httpx.Timeout(DEFAULT_TIMEOUT_SECONDS), follow_redirects=True) as client:
+        return await client.request(method, url, headers=request_headers)
+
+
 def response_evidence(response: httpx.Response) -> dict[str, Any]:
     """Return safe, reproducible metadata about an observed HTTP response."""
 
