@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any
+from typing import Any, Literal
 from uuid import uuid4
 
 from pydantic import BaseModel, Field, HttpUrl, field_validator
@@ -81,3 +81,31 @@ class Report(BaseModel):
     findings: list[Finding] = Field(default_factory=list)
     recommendations: list[str] = Field(default_factory=list)
     ai_summary: str = Field(min_length=1)
+    generated_at: datetime = Field(default_factory=utc_now)
+
+    @field_validator("generated_at")
+    @classmethod
+    def generated_at_must_be_aware(cls, value: datetime) -> datetime:
+        """Normalize report generation timestamps to UTC."""
+
+        if value.tzinfo is None:
+            raise ValueError("generated_at must include timezone information")
+        return value.astimezone(timezone.utc)
+
+
+class ScanArtifact(BaseModel):
+    """Durable JSON export containing one completed scan and its report."""
+
+    schema_version: Literal["1.0"] = "1.0"
+    stored_at: datetime = Field(default_factory=utc_now)
+    scan: Scan
+    report: Report
+
+    @field_validator("stored_at")
+    @classmethod
+    def stored_at_must_be_aware(cls, value: datetime) -> datetime:
+        """Normalize artifact storage timestamps to UTC."""
+
+        if value.tzinfo is None:
+            raise ValueError("stored_at must include timezone information")
+        return value.astimezone(timezone.utc)

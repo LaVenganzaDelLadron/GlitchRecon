@@ -6,9 +6,10 @@ import logging
 from datetime import datetime, timezone
 from typing import Protocol
 
-from app.models.schemas import Report, Scan, ScanStatus
+from app.models.schemas import Report, Scan, ScanArtifact, ScanStatus, utc_now
 from app.pipeline.context import PipelineContext
 from repositories.finding_repository import FindingRepository
+from repositories.json_scan_artifact_repository import JsonScanArtifactRepository
 from repositories.report_repository import ReportRepository
 from repositories.scan_repository import ScanRepository
 from services.ai_service import AIService
@@ -37,6 +38,7 @@ class ScanService:
         scan_repository: ScanRepository,
         finding_repository: FindingRepository,
         report_repository: ReportRepository,
+        artifact_repository: JsonScanArtifactRepository,
         finding_service: FindingService,
         ai_service: AIService,
     ) -> None:
@@ -44,6 +46,7 @@ class ScanService:
         self._scan_repository = scan_repository
         self._finding_repository = finding_repository
         self._report_repository = report_repository
+        self._artifact_repository = artifact_repository
         self._finding_service = finding_service
         self._ai_service = ai_service
 
@@ -58,28 +61,32 @@ class ScanService:
                 raise ScanExecutionError("; ".join(context.errors) or "Pipeline failed")
 
             findings = await self._finding_service.prepare_findings(context.findings)
-            enriched_findings, ai_summary = await self._ai_service.analyze_findings(findings)
-            for finding in enriched_findings:
+            for finding in findings:
                 await self._finding_repository.create(finding)
 
             report = await self._ai_service.generate_report(
-                findings=enriched_findings,
+                findings=findings,
                 target=str(scan.target),
                 technologies=list(dict.fromkeys(context.technologies)),
-                ai_analysis_summary=ai_summary,
             )
-            await self._report_repository.create(scan.id, report)
             completed_scan = scan.model_copy(
                 update={
                     "status": ScanStatus.COMPLETED,
                     "completed_at": datetime.now(timezone.utc),
-                    "findings": enriched_findings,
+                    "findings": findings,
                     "technologies": list(dict.fromkeys(context.technologies)),
-                    "metadata": {**context.metadata, "ai_summary": ai_summary},
+                    "metadata": {**context.metadata, "ai_summary": report.ai_summary},
                 }
             )
+            artifact = ScanArtifact(
+                stored_at=utc_now(),
+                scan=completed_scan,
+                report=report,
+            )
+            await self._artifact_repository.create(artifact)
+            await self._report_repository.create(scan.id, report)
             await self._scan_repository.update(scan.id, completed_scan)
-            logger.info("Scan %s completed with %s findings", scan.id, len(enriched_findings))
+            logger.info("Scan %s completed with %s findings", scan.id, len(findings))
             return report
         except Exception:
             failed_scan = scan.model_copy(

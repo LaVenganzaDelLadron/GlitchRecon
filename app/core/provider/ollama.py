@@ -22,15 +22,23 @@ class OllamaProvider(LLMProvider):
         self.client = Client(host=configured_host or None, timeout=timeout)
         self.default_model = default_model or os.getenv("OLLAMA_MODEL")
 
-    async def generate(self, prompt: str, model: str | None = None) -> str:
+    async def generate(
+        self,
+        prompt: str,
+        model: str | None = None,
+        max_output_tokens: int | None = None,
+    ) -> str:
         """Generate a response without blocking the application's event loop."""
 
         selected_model = model or self.default_model
         if not selected_model:
             raise ValueError("OLLAMA_MODEL must be set to use the Ollama provider")
 
+        request: dict[str, object] = {"model": selected_model, "prompt": prompt}
+        if max_output_tokens is not None:
+            request["options"] = {"num_predict": max_output_tokens}
         response = await asyncio.to_thread(
-            self.client.generate, model=selected_model, prompt=prompt
+            self.client.generate, **request
         )
 
         if isinstance(response, str):

@@ -13,6 +13,7 @@ class GroqProvider(LLMProvider):
         base_url: str | None = None,
         default_model: str | None = None,
         timeout_seconds: float | None = None,
+        reasoning_effort: str | None = None,
     ) -> None:
         api_key = api_key or os.getenv("GROQ_API_KEY")
         if not api_key:
@@ -35,13 +36,26 @@ class GroqProvider(LLMProvider):
         self.default_model = default_model or os.getenv(
             "GROQ_MODEL", "openai/gpt-oss-20b"
         )
+        self.reasoning_effort = reasoning_effort or os.getenv(
+            "GROQ_REASONING_EFFORT", "low"
+        )
 
-    async def generate(self, prompt: str, model: str | None = None) -> str:
+    async def generate(
+        self,
+        prompt: str,
+        model: str | None = None,
+        max_output_tokens: int | None = None,
+    ) -> str:
         """Generate a response without blocking the application's event loop."""
 
+        selected_model = model or self.default_model
+        request: dict[str, object] = {"input": prompt, "model": selected_model}
+        if max_output_tokens is not None:
+            request["max_output_tokens"] = max_output_tokens
+        if selected_model.startswith("openai/gpt-oss-"):
+            request["reasoning"] = {"effort": self.reasoning_effort}
         response = await asyncio.to_thread(
             self.client.responses.create,
-            input=prompt,
-            model=model or self.default_model,
+            **request,
         )
         return response.output_text.strip()

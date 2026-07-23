@@ -8,6 +8,7 @@ from app.config import get_llm_provider
 from app.pipeline.pipeline import Pipeline
 from app.pipeline.stages import ScannerExecutionStage, ValidationStage
 from repositories.finding_repository import FindingRepository
+from repositories.json_scan_artifact_repository import JsonScanArtifactRepository
 from repositories.report_repository import ReportRepository
 from repositories.scan_repository import ScanRepository
 from scanners.manager import ScannerManager
@@ -36,6 +37,13 @@ def get_report_repository() -> ReportRepository:
     """Return the process-scoped report repository adapter."""
 
     return ReportRepository()
+
+
+@lru_cache
+def get_artifact_repository() -> JsonScanArtifactRepository:
+    """Return the local JSON artifact persistence adapter."""
+
+    return JsonScanArtifactRepository()
 
 
 @lru_cache
@@ -71,6 +79,7 @@ def get_scan_service() -> ScanService:
         scan_repository=get_scan_repository(),
         finding_repository=get_finding_repository(),
         report_repository=get_report_repository(),
+        artifact_repository=get_artifact_repository(),
         finding_service=FindingService(),
         ai_service=AIService(get_llm_provider()),
     )

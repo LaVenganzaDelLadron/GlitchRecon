@@ -5,6 +5,7 @@ __pycache__/
 .venv/
 app.db
 scan_jobs/
+reports/
 screenshots/
 uploads/
 node_modules/
