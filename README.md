@@ -31,7 +31,7 @@ GlitchRecon runs a battery of passive and active security checks (XSS, SQLi, CSR
 ### 1. Clone & set up
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/LaVenganzaDelLadron/GlitchRecon.git
 cd GlitchRecon
 python -m venv .venv
 source .venv/bin/activate
