@@ -2,6 +2,7 @@
 from __future__ import annotations
 from collections import defaultdict
 from app.models.schemas import Finding
+
 class FindingCorrelation:
     """Groups already discovered findings by scanner evidence characteristics."""
     def correlate(self, findings:list[Finding])->dict[str,list[str]]:
